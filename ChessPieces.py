@@ -1,8 +1,8 @@
 class ChessPiece(object):
   def __init__(self,type,color): 
-    this.type = type
-    this.color = color
-    this.lastMove = 0
+    self.type = type
+    self.color = color
+    self.lastMove = 0
     
   def IsValidMove(self,Board, fromRow, fromCol, toRow, toCol, turn, turnNumber)
     if !(InRange(fromRow) and InRange(fromCol) and InRange(toRow) and InRange(toCol)):
