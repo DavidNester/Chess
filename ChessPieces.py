@@ -1,3 +1,5 @@
+
+#enum(Knight,Pawn,Rook,Bishop,Queen,King)
 class ChessPiece(object):
   def __init__(self,type,color): 
     self.type = type
