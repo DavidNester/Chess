@@ -26,7 +26,7 @@ class Bishop(ChessPiece):
 					    
 		    if board[toRow, toCol].ChessPiece == None:
                 return True
-            else if board[toRow, toCol].ChessPiece.PieceColor != turn:
+            elif board[toRow, toCol].ChessPiece.PieceColor != turn:
                 return True
             else:
                 return False
