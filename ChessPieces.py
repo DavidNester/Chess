@@ -1,4 +1,3 @@
-
 #enum(Knight,Pawn,Rook,Bishop,Queen,King)
 class ChessPiece(object):
   def __init__(self,type,color): 
@@ -7,7 +6,7 @@ class ChessPiece(object):
     self.lastMove = 0
     
   def IsValidMove(self,Board, fromRow, fromCol, toRow, toCol, turn, turnNumber)
-    if !(InRange(fromRow) and InRange(fromCol) and InRange(toRow) and InRange(toCol)):
+    if not (InRange(fromRow) and InRange(fromCol) and InRange(toRow) and InRange(toCol)):
       return False
     elif fromRow == toRow and fromCol == toCol:
       return False
