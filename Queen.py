@@ -12,7 +12,7 @@ class Pawn(ChessPiece):
                 if abs(fromCol - toCol) == 1:
                     if board[toRow, toCol].ChessPiece == None:
                         return True
-                    else if board[toRow, toCol].ChessPiece.PieceColor != turn:
+                    elif board[toRow, toCol].ChessPiece.PieceColor != turn:
                         return True
                     else:
                         return False
@@ -29,7 +29,7 @@ class Pawn(ChessPiece):
                 if abs(fromRow - toRow) == 1:
                     if board[toRow, toCol].ChessPiece == None:
                         return True
-                    else if board[toRow, toCol].ChessPiece.PieceColor != turn:
+                    elif board[toRow, toCol].ChessPiece.PieceColor != turn:
                         return True
                     else:
                         return False
@@ -44,7 +44,7 @@ class Pawn(ChessPiece):
             
             if board[toRow, toCol].ChessPiece == None:
                 return True
-            else if board[toRow, toCol].ChessPiece.PieceColor != turn:
+            elif board[toRow, toCol].ChessPiece.PieceColor != turn:
                 return True
             
             if abs(fromRow - toRow) == abs(fromCol - toCol):
@@ -65,7 +65,7 @@ class Pawn(ChessPiece):
 
                 if board[toRow, toCol].ChessPiece == None:
                     return True
-                else if board[toRow, toCol].ChessPiece.PieceColor != turn:
+                elif board[toRow, toCol].ChessPiece.PieceColor != turn:
                     return True
                 else:
                     return False
