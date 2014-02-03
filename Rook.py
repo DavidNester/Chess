@@ -1,10 +1,14 @@
 class Rook(ChessPiece):
+    
+    
     def __init__(self,color):
         super(Rook,self).__init__(self,Rook,color)
     
     @overrides(IsValidMove)
-    def override IsValidMove(board,fromRow,fromCol,toRow,toCol,turn,turnNumber):
-        if not (super(Bishop,self).IsValidMove(board,fromRow,fromCol,toRow,toCol,turn,turnNumber)):
+    def override IsValidMove(board,fromRow,fromCol,
+                             toRow,toCol,turn,turnNumber):
+        if not (super(Bishop,self).IsValidMove(board,fromRow,
+                                               fromCol,toRow,toCol,turn,turnNumber)):
             return False
         if fromRow != toRow and fromCol != toCol:
                 return False
