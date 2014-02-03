@@ -1,4 +1,11 @@
 #enum(Knight,Pawn,Rook,Bishop,Queen,King)
+King = 'K'
+Queen = 'Q'
+Rook = 'R'
+Bishop = 'B'
+Knight = 'N'
+Pawn = 'P'
+pieces = [King, Queen, Rook, Bishop, Knight, Pawn]
 class ChessPiece(object):
   def __init__(self,type,color): 
     self.type = type
