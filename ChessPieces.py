@@ -16,7 +16,7 @@ class ChessPiece(object):
     self.lastMove = 0
     
   def IsValidMove(self,Board, fromRow, fromCol, 
-                  toRow, toCol, turn, turnNumber)
+                  toRow, toCol, turn, turnNumber):
     if not (InRange(fromRow) and InRange(fromCol) 
                     and InRange(toRow) and InRange(toCol)):
       return False
@@ -25,7 +25,7 @@ class ChessPiece(object):
     else:
       return True
   
-  def InRange(self,value)
+  def InRange(self,value):
     if 0<=value and value<8:
       return True
     else:
