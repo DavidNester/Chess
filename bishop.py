@@ -18,21 +18,20 @@ class Bishop(ChessPiece):
 	        if fromRow > toRow and fromCol > toCol:
                     if board[fromRow-i,fromCol-i].ChessPiece != None:
 		        return False
-	            elif fromRow > toRow and fromCol < toCol:
-			        if (board[fromRow-i,fromCol+i].ChessPiece != None:
-				        return False
-			    elif fromRow<toRow and fromCol<toCol:
-			        if board[fromRow+i,fromCol+i].ChessPiece != None:
-			            return False    
-			    elif fromRow < toRow and fromCol > toCol:
-				    if board[fromRow+i,fromCol-i].ChessPiece != None:
-					    return False
-					    
-		    if board[toRow, toCol].ChessPiece == None:
+	        elif fromRow > toRow and fromCol < toCol:
+	            if (board[fromRow-i,fromCol+i].ChessPiece != None:
+			return False
+		elif fromRow<toRow and fromCol<toCol:
+	            if board[fromRow+i,fromCol+i].ChessPiece != None:
+			return False    
+	        elif fromRow < toRow and fromCol > toCol:
+		    if board[fromRow+i,fromCol-i].ChessPiece != None:
+			return False
+	    if board[toRow, toCol].ChessPiece == None:
                 return True
             elif board[toRow, toCol].ChessPiece.PieceColor != turn:
                 return True
             else:
                 return False
-	    else:
+	else:
             return False
