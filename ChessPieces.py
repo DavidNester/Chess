@@ -26,7 +26,7 @@ class ChessPiece(object):
       return True
   
   def InRange(self,value):
-    if 0<=value and value<8:
+    if 0 <= value and value < 8:
       return True
     else:
       return False
