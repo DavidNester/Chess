@@ -51,3 +51,34 @@ class PieceTests(unittest.TestCase):
         board[2,0] = Square(King(White))
         is_valid = king.IsValidMove(board, 1,0, 2,0, Black, 6)
         self.assertEqual(is_valid, True)
+
+    def test_king_moves(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('e1')
+        self.assertEqual(moves, [])
+
+
+column_names = 'abcdefgh'
+row_names = range(1, 8+1)
+
+class Board(object):
+    def __init__(self, *rows):
+        self.rows = [list(row) for row in rows]
+
+    def valid_moves(self, square):  # 'a1'
+        piece = King(White)  # TODO: detect what the piece really is
+        for column in column_names:
+            for row in row_names:
+                is_valid_move = False  # TODO: actually check
+                if is_valid_move:
+                    pass
+        return []
