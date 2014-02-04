@@ -1,5 +1,5 @@
 import unittest
-from BoardSquare import Black
+from BoardSquare import Black, White
 from King import King
 
 class Square(object):
@@ -36,4 +36,11 @@ class PieceTests(unittest.TestCase):
         king = King(Black)
         board = make_3x3_board()
         is_valid = king.IsValidMove(board, 0,0, 2,0, Black, 6)
+        self.assertEqual(is_valid, False)
+
+    def test_king_taking_another_black_piece(self):
+        king = King(Black)
+        board = make_3x3_board()
+        board[2,0] = Square(King(Black))
+        is_valid = king.IsValidMove(board, 1,0, 2,0, Black, 6)
         self.assertEqual(is_valid, False)

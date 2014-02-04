@@ -16,7 +16,7 @@ class King(ChessPiece):
         #Wasnt sure about translation of next line
         elif board[toRow,toCol].ChessPiece == None:
             return True
-        elif board[toRow,toCol].ChessPiece.PieceColor != turn:
+        elif board[toRow,toCol].ChessPiece.color != self.color:
             return True
         return False        
     
