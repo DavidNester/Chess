@@ -11,12 +11,13 @@ class King(ChessPiece):
         if not (super(King,self).IsValidMove(board,fromRow,fromCol,
                                              toRow,toCol,turn,turnNumber)):
             return False
-        if abs(toRow-fromRow) > 1 or abs(toCol-fromRow) > 1:
+        if abs(toRow-fromRow) > 1 or abs(toCol-fromCol) > 1:
             return False
         #Wasnt sure about translation of next line
-        elif board[toRow,toCol].ChessPiece == None:
+        other_piece = board[toRow,toCol].ChessPiece
+        if other_piece is None:
             return True
-        elif board[toRow,toCol].ChessPiece.color != self.color:
+        if other_piece.color != self.color:
             return True
         return False        
     
