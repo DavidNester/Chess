@@ -2,12 +2,26 @@ import unittest
 from BoardSquare import Black
 from King import King
 
+class Square(object):
+    """Test board square."""
+    def __init__(self, piece=None):
+        self.ChessPiece = piece
+
+def make_3x3_board():
+    return {(0,0): Square(),
+            (1,0): Square(),
+            (2,0): Square()}
+
 class PieceTests(unittest.TestCase):
 
     def test_king_staying_in_one_place(self):
         king = King(Black)
-        board = {(0,0): None,
-                 (1,0): None,
-                 (2,0): None}
+        board = make_3x3_board()
         is_valid = king.IsValidMove(board, 0,0, 0,0, Black, 6)
         self.assertEqual(is_valid, False)
+
+    def test_king_moving_one_square(self):
+        king = King(Black)
+        board = make_3x3_board()
+        is_valid = king.IsValidMove(board, 0,0, 1,0, Black, 6)
+        self.assertEqual(is_valid, True)
