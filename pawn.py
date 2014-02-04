@@ -1,4 +1,6 @@
 class Pawn(ChessPiece):
+    
+    
     def __init__(self,color):
         super(Pawn,self).__init__(self,Pawn,color)
     
@@ -17,7 +19,9 @@ class Pawn(ChessPiece):
                 return True
             #en passant(complex move). might just delete it because I'm not sure it worked in original
             elif abs(fromRow - toRow) == 1 and abs(toCol - fromCol) == 1:
-                if board[fromRow, toCol].ChessPiece.Name == ChessPieces.Pawn and board[fromRow, toCol].ChessPiece.PieceColor != turn and board[fromRow, toCol].ChessPiece.LastMove == turnNumber - 1:
+                if board[fromRow, toCol].ChessPiece.Name == ChessPieces.Pawn 
+                        and board[fromRow, toCol].ChessPiece.PieceColor != turn 
+                        and board[fromRow, toCol].ChessPiece.LastMove == turnNumber - 1:
                     return True
                 else:
                     return False
@@ -29,7 +33,8 @@ class Pawn(ChessPiece):
             else:
                 return False
         elif board[toRow, toCol].ChessPiece != None:
-            if board[toRow, toCol].ChessPiece.PieceColor != turn and abs(fromRow - toRow) == 1 and Math.Abs(toCol-fromCol) == 1:
+            if board[toRow, toCol].ChessPiece.PieceColor != turn 
+                    and abs(fromRow - toRow) == 1 and Math.Abs(toCol-fromCol) == 1:
                 return True
             else:
                 return False
