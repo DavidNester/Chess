@@ -31,3 +31,9 @@ class PieceTests(unittest.TestCase):
         board = make_3x3_board()
         is_valid = king.IsValidMove(board, 1,0, 0,0, Black, 6)
         self.assertEqual(is_valid, True)
+
+    def test_king_moving_two_squares(self):
+        king = King(Black)
+        board = make_3x3_board()
+        is_valid = king.IsValidMove(board, 0,0, 2,0, Black, 6)
+        self.assertEqual(is_valid, False)
