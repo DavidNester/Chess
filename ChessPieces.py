@@ -1,11 +1,11 @@
 #enum(Knight,Pawn,Rook,Bishop,Queen,King)
-King = 'K'
-Queen = 'Q'
-Rook = 'R'
-Bishop = 'B'
-Knight = 'N'
-Pawn = 'P'
-pieces = [King, Queen, Rook, Bishop, Knight, Pawn]
+KING = 'K'
+QUEEN = 'Q'
+ROOK = 'R'
+BISHOP = 'B'
+KNIGHT = 'N'
+PAWN = 'P'
+pieces = [KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN]
 
 class ChessPiece(object):
   
@@ -24,11 +24,9 @@ class ChessPiece(object):
       return False
     else:
       return True
-  
-  def InRange(self,value):
-    if 0 <= value and value < 8:
-      return True
+
+def InRange(value):
+    if 0 <= value < 8:
+        return True
     else:
-      return False
-  
-    
+        return False
