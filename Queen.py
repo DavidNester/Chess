@@ -1,77 +1,79 @@
-class Pawn(ChessPiece):
+from ChessPieces import ChessPiece, QUEEN
+from BoardSquare import Colors, White, Black
+
+class Queen(ChessPiece):
     
     
     def __init__(self,color):
         super(Queen,self).__init__(self,Queen,color)
     
-    @overrides(IsValidMove)
-    def override IsValidMove(board,fromRow,fromCol,
-                             toRow,toCol,turn,turnNumber):
-        if not (super(Bishop,self).IsValidMove(board,fromRow,fromCol,
-                                               toRow,toCol,turn,turnNumber)):
+    def is_valid_move(board,from_row,from_col,
+                             to_row,to_Col,turn,turn_number):
+        if not (super(Bishop,self).is_valid_move(board,from_row,from_col,
+                                               to_row,to_Col,turn,turn_number)):
             return False
-        if fromRow != toRow and fromCol != toCol 
-                and abs(fromRow - toRow) != abs(fromCol - toCol):
+        if from_row != to_row and from_col != to_Col 
+                and abs(from_row - to_row) != abs(from_col - to_Col):
             return False 
-        if fromRow == toRow:
-            if abs(fromCol - toCol) == 1:
-                if board[toRow, toCol].ChessPiece == None:
+        if from_row == to_row:
+            if abs(from_col - to_Col) == 1:
+                if board[to_row, to_Col].ChessPiece == None:
                     return True
-                elif board[toRow, toCol].ChessPiece.PieceColor != turn:
+                elif board[to_row, to_Col].ChessPiece.PieceColor != turn:
                     return True
                 else:
                     return False
-                # C#: for (int i = 1; i <= Math.Abs(toCol - fromCol) - 1; i++)
-            for i in range(1,abs(toCol-fromCol)-1):
-                if fromCol > toCol
-                    if board[fromRow, fromCol - i].ChessPiece != None:
+                # C#: for (int i = 1; i <= Math.Abs(to_Col - from_col) - 1; i++)
+            for i in range(1,abs(to_Col-from_col)-1):
+                if from_col > to_Col
+                    if board[from_row, from_col - i].ChessPiece != None:
                         return False
-                if fromCol < toCol:
-                    if board[fromRow, fromCol + i].ChessPiece != None:
+                if from_col < to_Col:
+                    if board[from_row, from_col + i].ChessPiece != None:
                         return False
-            if fromCol == toCol
-                if abs(fromRow - toRow) == 1:
-                    if board[toRow, toCol].ChessPiece == None:
-                        return True
-                    elif board[toRow, toCol].ChessPiece.PieceColor != turn:
-                        return True
-                    else:
+        if from_col == to_Col
+            if abs(from_row - to_row) == 1:
+                if board[to_row, to_Col].ChessPiece == None:
+                    return True
+                elif board[to_row, to_Col].ChessPiece.PieceColor != turn:
+                    return True
+                else:
+                    return False
+                # C#: for (int i = 1; i <= Math.Abs(to_row - from_row) - 1; i++)
+            for i in range(1,abs(to_row - from_row) - 1):
+                if from_row > to_row:
+                    if board[from_row - i, from_col].ChessPiece != None:
                         return False
-                # C#: for (int i = 1; i <= Math.Abs(toRow - fromRow) - 1; i++)
-                for i in range(1,abs(toRow - fromRow) - 1):
-                    if fromRow > toRow:
-                        if board[fromRow - i, fromCol].ChessPiece != None:
-                            return False
-                    if fromRow < toRow:
-                        if board[fromRow + i, fromCol].ChessPiece != None:
-                            return False
+                if from_row < to_row:
+                    if board[from_row + i, from_col].ChessPiece != None:
+                        return False
             
-            if board[toRow, toCol].ChessPiece == None:
+            if board[to_row, to_Col].ChessPiece == None:
                 return True
-            elif board[toRow, toCol].ChessPiece.PieceColor != turn:
+            elif board[to_row, to_Col].ChessPiece.PieceColor != turn:
                 return True
             
-            if abs(fromRow - toRow) == abs(fromCol - toCol):
-                # C#: for (int i = 1; i < Math.Abs(fromRow - toRow); i++)
-                for i in range(1,abs(fromRow - toRow)):
-                    if fromRow > toRow and fromCol > toCol:
-                        if board[fromRow - i, fromCol - i].ChessPiece != None:
-                            return False
-                    if fromRow > toRow and fromCol < toCol:
-                        if board[fromRow - i, fromCol + i].ChessPiece != None:
-                            return False
-                    if fromRow < toRow and fromCol < toCol
-                        if board[fromRow + i, fromCol + i].ChessPiece != None:
-                            return False
-                    if fromRow < toRow and fromCol > toCol:
-                        if board[fromRow + i, fromCol - i].ChessPiece != None:
-                            return False
+        if abs(from_row - to_row) == abs(from_col - to_Col):
+            # C#: for (int i = 1; i < Math.Abs(from_row - to_row); i++)
+            for i in range(1,abs(from_row - to_row)):
+                if from_row > to_row and from_col > to_Col:
+                    if board[from_row - i, from_col - i].ChessPiece != None:
+                        return False
+                if from_row > to_row and from_col < to_Col:
+                    if board[from_row - i, from_col + i].ChessPiece != None:
+                        return False
+                if from_row < to_row and from_col < to_Col
+                    if board[from_row + i, from_col + i].ChessPiece != None:
+                        return False
+                if from_row < to_row and from_col > to_Col:
+                    if board[from_row + i, from_col - i].ChessPiece != None:
+                        return False
 
-                if board[toRow, toCol].ChessPiece == None:
-                    return True
-                elif board[toRow, toCol].ChessPiece.PieceColor != turn:
-                    return True
-                else:
-                    return False
+            if board[to_row, to_Col].ChessPiece == None:
+                return True
+            elif board[to_row, to_Col].ChessPiece.PieceColor != turn:
+                return True
             else:
                 return False
+        else:
+            return False

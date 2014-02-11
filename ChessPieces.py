@@ -15,17 +15,17 @@ class ChessPiece(object):
     self.color = color
     self.lastMove = 0
     
-  def IsValidMove(self,Board, fromRow, fromCol, 
-                  toRow, toCol, turn, turnNumber):
-    if not (InRange(fromRow) and InRange(fromCol) 
-                    and InRange(toRow) and InRange(toCol)):
+  def is_valid_move(self,Board, from_row, from_col, 
+                  to_row, to_Col, turn, turn_number):
+    if not (in_ange(from_row) and in_range(from_col) 
+                    and in_range(to_row) and in_range(to_Col)):
       return False
-    elif fromRow == toRow and fromCol == toCol:
+    elif from_row == to_row and from_col == to_Col:
       return False
     else:
       return True
 
-def InRange(value):
+def in_range(value):
     if 0 <= value < 8:
         return True
     else:
