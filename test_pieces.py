@@ -34,8 +34,8 @@ class PieceTests(unittest.TestCase):
        moves = b.valid_moves('e1')
        self.assertEqual(moves, [])
   
-	def test_king_taking_a_piece(self):
-         b = Board("rnbqkbnr", #8
+    def test_king_taking_a_piece(self):
+        b = Board("rnbqkbnr", #8
                  "pppppppp", #7
                  "....K...", #6
                  "........", #5
@@ -45,8 +45,8 @@ class PieceTests(unittest.TestCase):
                  "RNBQ.BNR", #1
                   #abcdefgh
                   )
-       moves = b.valid_moves('e6')
-       self.assertEqual(moves, ['d5', 'd6', 'd7', 'e5',
+        moves = b.valid_moves('e6')
+        self.assertEqual(moves, ['d5', 'd6', 'd7', 'e5',
                                 'e7', 'f5', 'f6', 'f7'])
 
     def test_white_pawn_free(self):
@@ -61,9 +61,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('b3')
-        self.assertEqual(moves, ['c4'])
-	
-	def test_white_pawn_starting(self):
+        self.assertEqual(moves, ['b4'])
+
+    def test_white_pawn_starting(self):
         b = Board("rnbqkbnr", #8
                   "pppppppp", #7
                   "........", #6
@@ -77,7 +77,7 @@ class PieceTests(unittest.TestCase):
         moves = b.valid_moves('e2')
         self.assertEqual(moves, ['e3', 'e4'])
 	
-	def test_white_pawn_attack(self):
+    def test_white_pawn_attack(self):
         b = Board("rnbqkbnr", #8
                   ".p.ppppp", #7
                   "........", #6
@@ -90,8 +90,8 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b3')
         self.assertEqual(moves, ['a4', 'b4', 'c4'])
-	
-	def test_white_pawn_attack_starting(self):
+
+    def test_white_pawn_attack_starting(self):
         b = Board("rnbqkbnr", #8
                   "...ppppp", #7
                   "........", #6
@@ -104,8 +104,8 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b2')
         self.assertEqual(moves, ['a3', 'b3', 'c3'])
-		
-	def test_white_pawn_attack_starting(self):
+
+    def test_white_pawn_attack_starting(self):
         b = Board("rnbqkbnr", #8
                   "...ppppp", #7
                   "........", #6
@@ -118,8 +118,8 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b2')
         self.assertEqual(moves, ['a3', 'c3'])
-		
-	def test_black_pawn_free(self):
+
+    def test_black_pawn_free(self):
         b = Board("rnbqkbnr", #8
                   "p.pppppp", #7
                   ".p......", #6
@@ -131,9 +131,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('b6')
-        self.assertEqual(moves, ['c5'])
-	
-	def test_black_pawn_starting(self):
+        self.assertEqual(moves, ['b5'])
+
+    def test_black_pawn_starting(self):
         b = Board("rnbqkbnr", #8
                   "pppppppp", #7
                   "........", #6
@@ -145,9 +145,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('e7')
-        self.assertEqual(moves, ['e6', 'e5'])
-	
-	def test_black_pawn_attack(self):
+        self.assertEqual(moves, ['e5', 'e6'])
+
+    def test_black_pawn_attack(self):
         b = Board("rnbqkbnr", #8
                   "p.pppppp", #7
                   ".p......", #6
@@ -160,8 +160,8 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b6')
         self.assertEqual(moves, ['a5', 'b5', 'c5'])
-	
-	def test_black_pawn_attack_starting(self):
+
+    def test_black_pawn_attack_starting(self):
         b = Board("rnbqkbnr", #8
                   "pppppppp", #7
                   "PPP.....", #6
@@ -174,7 +174,35 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b7')
         self.assertEqual(moves, ['a6', 'c6'])
-		
+
+    def test_black_pawn_attack_starting(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "PPP.....", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "...PPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('b7')
+        self.assertEqual(moves, ['a6', 'c6'])
+    
+    def test_white_knight(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "..N.....", #3
+                  "PPPPPPPP", #2
+                  "R.BQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('c3')
+        self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
+
 
 
 column_names = 'abcdefgh'
@@ -189,9 +217,9 @@ class Board(object):
         letter, number = square
         y = row_names.index(number)
         x = column_names.index(letter)
-		code = self.rows[y][x]
-		piece_class = piece_classes[code.lower()]
-		color = White if code.isupper() else Black
+        code = self.rows[y][x]
+        piece_class = piece_classes[code.lower()]
+        color = White if code.isupper() else Black
         piece = piece_class(color)  # TODO: detect what the piece really is
         moves = []
         for column in column_names:
@@ -212,7 +240,7 @@ class Board(object):
         return square
 	
 
-Queen = Bishop = Rook = Knight = King
+
 def return_none(color):
     return None
 

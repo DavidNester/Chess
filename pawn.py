@@ -30,10 +30,10 @@ class Pawn(ChessPiece):
                     #else:
             #return False
             elif abs(from_row - to_row) == 2 and to_Col == from_col:
-				if turn == Black and board[5,to_Col].ChessPiece != None:
-					return False
-				elif turn == White and board[2,to_Col].ChessPiece != None:
-					return False
+                if turn == Black and board[5,to_Col].ChessPiece != None:
+                    return False
+                elif turn == White and board[2,to_Col].ChessPiece != None:
+                    return False
                 elif turn == Black and from_row == 6:
                     return True
                 elif turn == White and from_row == 1:

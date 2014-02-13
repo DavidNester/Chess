@@ -17,7 +17,7 @@ class ChessPiece(object):
     
   def is_valid_move(self,Board, from_row, from_col, 
                   to_row, to_Col, turn, turn_number):
-    if not (in_ange(from_row) and in_range(from_col) 
+    if not (in_range(from_row) and in_range(from_col)
                     and in_range(to_row) and in_range(to_Col)):
       return False
     elif from_row == to_row and from_col == to_Col:
