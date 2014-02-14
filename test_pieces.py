@@ -203,6 +203,249 @@ class PieceTests(unittest.TestCase):
         moves = b.valid_moves('c3')
         self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
 
+    def test_white_knight_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('b1')
+        self.assertEqual(moves, ['a3', 'c3'])
+
+    def test_white_knight_attack(self):
+        b = Board("rnbqkbnr", #8
+                  ".ppp.ppp", #7
+                  "........", #6
+                  "........", #5
+                  "p...p...", #4
+                  "..N.....", #3
+                  "PPPPPPPP", #2
+                  "R.BQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('c3')
+        self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
+        
+    def test_black_knight(self):
+        b = Board("r.bqkbnr", #8
+                  "pppppppp", #7
+                  "..n.....", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('c6')
+        self.assertEqual(moves, ['a5', 'b4', 'b8', 'd4', 'e5'])
+
+
+    def test_black_knight_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('b8')
+        self.assertEqual(moves, ['a6', 'c6'])
+    
+    def test_black_knight_attack(self):
+        b = Board("r.bqkbnr", #8
+                  "pppppppp", #7
+                  "..n.....", #6
+                  "P...P...", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('c6')
+        self.assertEqual(moves, ['a5', 'b4', 'b8', 'd4', 'e5'])
+
+    def test_white_bishop(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "BP......", #3
+                  "P.PPPPPP", #2
+                  "RN.QKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a3')
+        self.assertEqual(moves, ['b2', 'b4', 'c1', 'c5', 'd6', 'e7'])
+    
+    def test_white_bishop_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('c1')
+        self.assertEqual(moves, [])
+    
+    def test_white_bishop_attack(self):
+        b = Board("rnbqkbnr", #8
+                  ".ppp.ppp", #7
+                  "........", #6
+                  "........", #5
+                  ".p......", #4
+                  "BP......", #3
+                  "PbPPPPPP", #2
+                  "RN.QKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a3')
+        self.assertEqual(moves, ['b2', 'b4'])
+    
+    def test_black_bishop(self):
+        b = Board("rn.qkbnr", #8
+                  "p.pppppp", #7
+                  "bp......", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a6')
+        self.assertEqual(moves, ['b5', 'b7', 'c4', 'c8', 'd3', 'e2'])
+    
+    
+    def test_black_bishop_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('c8')
+        self.assertEqual(moves, [])
+    
+    def test_black_bishop_attack(self):
+        b = Board("rn.qkbnr", #8
+                  "pBpppppp", #7
+                  "bp......", #6
+                  ".P......", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a6')
+        self.assertEqual(moves, ['b5', 'b7'])
+    
+    def test_white_rook(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "P.......", #5
+                  "........", #4
+                  "R.......", #3
+                  ".PPPPPPP", #2
+                  ".NBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a3')
+        self.assertEqual(moves, ['a1', 'a2', 'a4', 'b3', 'c3',
+                                 'd3', 'e3', 'f3', 'g3', 'h3'])
+    
+    def test_white_rook_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a1')
+        self.assertEqual(moves, [])
+    
+    def test_white_rook_attack(self):
+        b = Board("rnbqkbnr", #8
+                  "p.pp..pp", #7
+                  "........", #6
+                  ".p.R.p..", #5
+                  "P.......", #4
+                  "...b....", #3
+                  ".PPPPPPP", #2
+                  ".NBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('d5')
+        self.assertEqual(moves, ['b5', 'c5', 'd3', 'd4', 'd6', 'd7', 'e5', 'f5'])
+    
+    def test_black_rook(self):
+        b = Board(".nbqkbnr", #8
+                  ".ppppppp", #7
+                  "r.......", #6
+                  "........", #5
+                  "p.......", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a6')
+        self.assertEqual(moves, ['a5', 'a7', 'a8', 'b6', 'c6',
+                                 'd6', 'e6', 'f6', 'g6', 'h6'])
+    
+    
+    def test_black_rook_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a8')
+        self.assertEqual(moves, [])
+    
+    def test_black_rook_attack(self):
+        b = Board(".nbqkbnr", #8
+                  ".ppppppp", #7
+                  "........", #6
+                  "pP.r.P..", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('d5')
+        self.assertEqual(moves, ['b5', 'c5', 'd2', 'd3',
+                                 'd4', 'd6', 'e5', 'f5'])
 
 
 column_names = 'abcdefgh'

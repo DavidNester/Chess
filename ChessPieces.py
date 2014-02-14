@@ -16,11 +16,11 @@ class ChessPiece(object):
     self.lastMove = 0
     
   def is_valid_move(self,Board, from_row, from_col, 
-                  to_row, to_Col, turn, turn_number):
+                  to_row, to_col, turn, turn_number):
     if not (in_range(from_row) and in_range(from_col)
-                    and in_range(to_row) and in_range(to_Col)):
+                    and in_range(to_row) and in_range(to_col)):
       return False
-    elif from_row == to_row and from_col == to_Col:
+    elif from_row == to_row and from_col == to_col:
       return False
     else:
       return True
