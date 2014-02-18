@@ -446,6 +446,99 @@ class PieceTests(unittest.TestCase):
         moves = b.valid_moves('d5')
         self.assertEqual(moves, ['b5', 'c5', 'd2', 'd3',
                                  'd4', 'd6', 'e5', 'f5'])
+    def test_white_queen(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "....P.Q.", #4
+                  "........", #3
+                  "PPPP.PPP", #2
+                  "RNB.KBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('g4')
+        self.assertEqual(moves, ['d1', 'd7', 'e2', 'e6', 'f3',
+                                 'f4', 'f5', 'g3', 'g5', 'g6',
+                                 'g7', 'h3', 'h4', 'h5'])
+            
+    def test_white_queen_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('d1')
+        self.assertEqual(moves, [])
+    
+    def test_white_queen_attack(self):
+        b = Board("r..qk.nr", #8
+                  "p.....pp", #7
+                  "..npb...", #6
+                  ".p.Q.p..", #5
+                  "..p.p...", #4
+                  "...b....", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('d5')
+        self.assertEqual(moves, ['b5', 'c4', 'c5', 'c6', 'd3',
+                                 'd4', 'd6', 'e4', 'e5', 'e6',
+                                 'f5'])
+    
+    def test_black_queen(self):
+        b = Board("rnb.kbnr", #8
+                  "pp.ppppp", #7
+                  "........", #6
+                  "q.p.....", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('a5')
+        self.assertEqual(moves, ['a2', 'a3', 'a4', 'a6', 'b4',
+                                 'b5', 'b6', 'c3', 'c7', 'd2',
+                                 'd8'])
+    
+    
+    def test_black_queen_start(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('d8')
+        self.assertEqual(moves, [])
+    
+    def test_black_queen_attack(self):
+        b = Board(".nbqkbnr", #8
+                  ".ppppppp", #7
+                  "..PBP...", #6
+                  "pP.q.P..", #5
+                  "..P.P...", #4
+                  "...P....", #3
+                  "PPPPPPPP", #2
+                  "RNBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.valid_moves('d5')
+        self.assertEqual(moves, ['b5', 'c4', 'c5', 'c6',
+                                 'd3', 'd4', 'd6', 'e4',
+                                 'e5', 'e6', 'f5'])
+
 
 
 column_names = 'abcdefgh'
