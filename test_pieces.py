@@ -539,7 +539,45 @@ class PieceTests(unittest.TestCase):
                                  'd3', 'd4', 'd6', 'e4',
                                  'e5', 'e6', 'f5'])
 
+#my attempts at check
+##################################################################
+def make_move(self, board, from_row, from_col, to_row, to_col):
+    board[to_row,to_col].ChessPiece = board[from_row, from_col].ChessPiece
+    board[from_row, from_col].ChessPiece = None
 
+def check_for_check(self, board, turn):
+    king_col, king_row = king_location(board, turn)
+    for column in column_names:
+        x2 = column_names.index(column)
+        for row in row_names:
+            y2 = row_names.index(row)
+            if board[row, column].ChessPiece.color is not turn:
+                piece = board[row, column].ChessPiece
+                if piece.is_valid_move(board, row, column, king_row,
+                                       king_col, piece.color, 12):
+                    return True
+    else:
+        return False
+
+def check_controller(self, board, from_row, from_col, to_row, to_col, turn):
+    replaced_piece = board[to_row,to_col].ChessPiece
+    make_move(board, from_row, from_col, to_row, to_col)
+    if check_for_check:
+        make_move(board, to_row, to_col, from_row, from_col)
+        board[to_row,to_col].ChessPiece = replaced_piece
+    else:
+        turn_number += 1
+        if turn is White:
+            turn = Black
+        else:
+            turn = White
+
+def king_location(self, board, turn)
+    for column in column_names:
+        for row in row_names:
+            if board[row,column].ChessPiece == King(turn):
+                return "%s", % (column,row)
+####################################################################
 
 column_names = 'abcdefgh'
 row_names = '12345678'
