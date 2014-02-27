@@ -556,13 +556,12 @@ def check_for_check(self, board, turn):
                 if piece.is_valid_move(board, row, column, king_row,
                                        king_col, piece.color, 12):
                     return True
-    else:
-        return False
+    return False
 
-def check_controller(self, board, from_row, from_col, to_row, to_col, turn):
+def move_controller(self, board, from_row, from_col, to_row, to_col, turn):
     replaced_piece = board[to_row,to_col].ChessPiece
     make_move(board, from_row, from_col, to_row, to_col)
-    if check_for_check:
+    4if check_for_check:
         make_move(board, to_row, to_col, from_row, from_col)
         board[to_row,to_col].ChessPiece = replaced_piece
     else:
