@@ -561,7 +561,7 @@ def check_for_check(self, board, turn):
 def move_controller(self, board, from_row, from_col, to_row, to_col, turn):
     replaced_piece = board[to_row,to_col].ChessPiece
     make_move(board, from_row, from_col, to_row, to_col)
-    4if check_for_check:
+    if check_for_check:
         make_move(board, to_row, to_col, from_row, from_col)
         board[to_row,to_col].ChessPiece = replaced_piece
     else:
@@ -571,11 +571,11 @@ def move_controller(self, board, from_row, from_col, to_row, to_col, turn):
         else:
             turn = White
 
-def king_location(self, board, turn)
+def king_location(self, board, turn):
     for column in column_names:
         for row in row_names:
             if board[row,column].ChessPiece == King(turn):
-                return "%s", % (column,row)
+                return "%s" % (column,row)
 ####################################################################
 
 column_names = 'abcdefgh'

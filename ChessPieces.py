@@ -15,7 +15,7 @@ class ChessPiece(object):
         self.color = color
         self.lastMove = 0
 
-    def is_valid_move(self,Board, from_row, from_col,
+    def is_valid_move(self,board, from_row, from_col,
                       to_row, to_col, turn, turn_number):
         if not (in_range(from_row) and in_range(from_col)
                 and in_range(to_row) and in_range(to_col)):
