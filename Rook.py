@@ -1,12 +1,42 @@
 from ChessPieces import ChessPiece, ROOK
 from BoardSquare import Colors, White, Black
 
+column_names = 'abcdefgh'
+row_names = '12345678'
+
+n = ( 0, +1)
+s = ( 0, -1)
+w = (+1,  0)
+e = (-1,  0)
+
+def go(direction, x, y):
+    dx, dy = direction
+    while True:
+        x += dx
+        y += dy
+        if not (0 <= x < 8 and 0 <= y < 8):
+            break
+        # if position is my own piece:
+        #   break
+        # if position is opponent piece:
+        #   yield x, y
+        #   break
+        yield x, y
+
 class Rook(ChessPiece):
-    
-    
     def __init__(self,color):
         super(Rook,self).__init__(Rook,color)
-    
+
+    def valid_moves(self, board, position, turn, turn_number):
+        """Position looks like 'a5'."""
+        column, row = position
+        x = column_names.index(column)
+        y = row_names.index(row)
+        directions = n, s, e, w
+        for direction in directions:
+            for x2, y2 in go(direction, x, y):
+                yield (x2, y2)
+
     def is_valid_move(self,board,from_row,from_col,
                       to_row,to_col,turn,turn_number):
         if not (super(Rook,self).is_valid_move(board,from_row,
@@ -70,3 +100,27 @@ class Rook(ChessPiece):
             return True
         else:
             return False
+
+if __name__ == '__main__':
+
+    def g():
+        for i in range(8):
+            yield i * i
+
+    for item in g():
+        print item
+
+    from test_pieces import Board
+
+    b = Board("rnbqkbnr", #8
+              "p.pppppp", #7
+              "........", #6
+              ".P......", #5
+              "R.......", #4
+              "........", #3
+              ".PPPPPPP", #2
+              ".NBQKBNR", #1
+              #abcdefgh
+              )
+    r = Rook(White)
+    print list(r.valid_moves(b, 'a4', White, 3))
