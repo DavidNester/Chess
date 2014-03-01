@@ -24,6 +24,8 @@ def go(direction, x, y):
         yield x, y
 
 class Rook(ChessPiece):
+    
+    
     def __init__(self,color):
         super(Rook,self).__init__(Rook,color)
 
