@@ -16,11 +16,11 @@ def go(direction, x, y):
         y += dy
         if not (0 <= x < 8 and 0 <= y < 8):
             break
-        # if position is my own piece:
-        #   break
-        # if position is opponent piece:
-        #   yield x, y
-        #   break
+        if board[x,y].ChessPiece.color is self.color:
+           break
+        if board[x,y].ChessPiece.color is not self.color:
+           yield x, y
+           break
         yield x, y
 
 class Rook(ChessPiece):
@@ -38,6 +38,19 @@ class Rook(ChessPiece):
         for direction in directions:
             for x2, y2 in go(direction, x, y):
                 yield (x2, y2)
+				
+	def new_is_valid_move(self,board,from_row,from_col,
+						  to_row,to_col,turn,turn_number):
+        moves = []
+        #could probably change so the method receives position
+        position = "%s%s" % (row_names[from_row], column_names[from_col])
+        while True:
+            moves.append(valid_moves(board, position, turn, turn_number))
+			to_position = (to_row, to_col)
+		for item in moves:
+			if item == to_position:
+                return True
+        return False
 
     def is_valid_move(self,board,from_row,from_col,
                       to_row,to_col,turn,turn_number):
