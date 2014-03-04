@@ -599,8 +599,14 @@ class Board(object):
             x2 = column_names.index(column)
             for row in row_names:
                 y2 = row_names.index(row)
-                if piece.is_valid_move(board, y,x, y2,x2, piece.color, 12):
-                    moves.append(column + row)
+                if piece is Rook:
+                    if piece.is_valid_move(board, y,x, y2,x2,
+                                           piece.color,12):
+                        moves.append(column + row)
+                else:
+                    if piece.is_valid_move(board, y,x, y2,x2,
+                                           piece.color, 12):
+                        moves.append(column + row)
         return moves
 
     def __getitem__(self, yx_coordinate):

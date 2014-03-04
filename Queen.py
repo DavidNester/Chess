@@ -34,8 +34,8 @@ class Queen(ChessPiece):
         super(Queen,self).__init__(Queen,color)
 		
 	def valid_moves(self, board, position, turn, turn_number):
-        """Position looks like 'a5'."""
         column, row = position
+        ###"""Position looks like 'a5'."""
         x = column_names.index(column)
         y = row_names.index(row)
         directions = n, s, e, w, ne, nw, se, sw
