@@ -32,7 +32,7 @@ class Bishop(ChessPiece):
         super(Bishop,self).__init__(Bishop,color)
     
     def valid_moves(self, board, position, turn, turn_number):
-        #"""Position looks like 'a5'."""
+        """Position looks like 'a5'."""
         column, row = position
         x = column_names.index(column)
         y = row_names.index(row)
