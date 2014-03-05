@@ -12,11 +12,6 @@ class Square(object):
     def __init__(self, piece=None):
         self.ChessPiece = piece
 
-def make_3x3_board():
-    return {(0,0): Square(),
-            (1,0): Square(),
-            (2,0): Square()}
-
 class PieceTests(unittest.TestCase):
 
 
@@ -76,7 +71,7 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('e2')
         self.assertEqual(moves, ['e3', 'e4'])
-	
+
     def test_white_pawn_attack(self):
         b = Board("rnbqkbnr", #8
                   ".p.ppppp", #7
@@ -90,20 +85,6 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b3')
         self.assertEqual(moves, ['a4', 'b4', 'c4'])
-
-    def test_white_pawn_attack_starting(self):
-        b = Board("rnbqkbnr", #8
-                  "...ppppp", #7
-                  "........", #6
-                  "........", #5
-                  "........", #4
-                  "ppp.....", #3
-                  "PPPPPPPP", #2
-                  "RNBQKBNR", #1
-                  #abcdefgh
-                  )
-        moves = b.valid_moves('b2')
-        self.assertEqual(moves, ['a3', 'b3', 'c3'])
 
     def test_white_pawn_attack_starting(self):
         b = Board("rnbqkbnr", #8
@@ -160,20 +141,6 @@ class PieceTests(unittest.TestCase):
                   )
         moves = b.valid_moves('b6')
         self.assertEqual(moves, ['a5', 'b5', 'c5'])
-
-    def test_black_pawn_attack_starting(self):
-        b = Board("rnbqkbnr", #8
-                  "pppppppp", #7
-                  "PPP.....", #6
-                  "........", #5
-                  "........", #4
-                  "........", #3
-                  "...PPPPP", #2
-                  "RNBQKBNR", #1
-                  #abcdefgh
-                  )
-        moves = b.valid_moves('b7')
-        self.assertEqual(moves, ['a6', 'c6'])
 
     def test_black_pawn_attack_starting(self):
         b = Board("rnbqkbnr", #8
@@ -286,7 +253,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a3')
-        self.assertEqual(moves, ['b2', 'b4', 'c1', 'c5', 'd6', 'e7'])
+        self.assertEqual(moves, {'b2', 'b4', 'c1', 'c5', 'd6', 'e7'})
     
     def test_white_bishop_start(self):
         b = Board("rnbqkbnr", #8
@@ -300,7 +267,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c1')
-        self.assertEqual(moves, [])
+        self.assertEqual(moves, set())
     
     def test_white_bishop_attack(self):
         b = Board("rnbqkbnr", #8
@@ -314,8 +281,8 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a3')
-        self.assertEqual(moves, ['b2', 'b4'])
-    
+        self.assertEqual(moves, {'b2', 'b4'})
+
     def test_black_bishop(self):
         b = Board("rn.qkbnr", #8
                   "p.pppppp", #7
@@ -328,7 +295,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a6')
-        self.assertEqual(moves, ['b5', 'b7', 'c4', 'c8', 'd3', 'e2'])
+        self.assertEqual(moves, {'b5', 'b7', 'c4', 'c8', 'd3', 'e2'})
     
     
     def test_black_bishop_start(self):
@@ -343,7 +310,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c8')
-        self.assertEqual(moves, [])
+        self.assertEqual(moves, set())
     
     def test_black_bishop_attack(self):
         b = Board("rn.qkbnr", #8
@@ -357,7 +324,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a6')
-        self.assertEqual(moves, ['b5', 'b7'])
+        self.assertEqual(moves, {'b5', 'b7'})
     
     def test_white_rook(self):
         b = Board("rnbqkbnr", #8
@@ -371,8 +338,8 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a3')
-        self.assertEqual(moves, ['a1', 'a2', 'a4', 'b3', 'c3',
-                                 'd3', 'e3', 'f3', 'g3', 'h3'])
+        self.assertEqual(moves, {'a1', 'a2', 'a4', 'b3', 'c3',
+                                 'd3', 'e3', 'f3', 'g3', 'h3'})
     
     def test_white_rook_start(self):
         b = Board("rnbqkbnr", #8
@@ -386,7 +353,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a1')
-        self.assertEqual(moves, [])
+        self.assertEqual(moves, set())
     
     def test_white_rook_attack(self):
         b = Board("rnbqkbnr", #8
@@ -400,7 +367,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('d5')
-        self.assertEqual(moves, ['b5', 'c5', 'd3', 'd4', 'd6', 'd7', 'e5', 'f5'])
+        self.assertEqual(moves, {'b5', 'c5', 'd3', 'd4', 'd6', 'd7', 'e5', 'f5'})
     
     def test_black_rook(self):
         b = Board(".nbqkbnr", #8
@@ -414,8 +381,8 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a6')
-        self.assertEqual(moves, ['a5', 'a7', 'a8', 'b6', 'c6',
-                                 'd6', 'e6', 'f6', 'g6', 'h6'])
+        self.assertEqual(moves, {'a5', 'a7', 'a8', 'b6', 'c6',
+                                 'd6', 'e6', 'f6', 'g6', 'h6'})
     
     
     def test_black_rook_start(self):
@@ -430,7 +397,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a8')
-        self.assertEqual(moves, [])
+        self.assertEqual(moves, set())
     
     def test_black_rook_attack(self):
         b = Board(".nbqkbnr", #8
@@ -444,8 +411,8 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('d5')
-        self.assertEqual(moves, ['b5', 'c5', 'd2', 'd3',
-                                 'd4', 'd6', 'e5', 'f5'])
+        self.assertEqual(moves, {'b5', 'c5', 'd2', 'd3',
+                                 'd4', 'd6', 'e5', 'f5'})
     def test_white_queen(self):
         b = Board("rnbqkbnr", #8
                   "pppppppp", #7
@@ -458,9 +425,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('g4')
-        self.assertEqual(moves, ['d1', 'd7', 'e2', 'e6', 'f3',
+        self.assertEqual(moves, {'d1', 'd7', 'e2', 'e6', 'f3',
                                  'f4', 'f5', 'g3', 'g5', 'g6',
-                                 'g7', 'h3', 'h4', 'h5'])
+                                 'g7', 'h3', 'h4', 'h5'})
             
     def test_white_queen_start(self):
         b = Board("rnbqkbnr", #8
@@ -474,7 +441,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('d1')
-        self.assertEqual(moves, [])
+        self.assertEqual(moves, set())
     
     def test_white_queen_attack(self):
         b = Board("r..qk.nr", #8
@@ -488,9 +455,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('d5')
-        self.assertEqual(moves, ['b5', 'c4', 'c5', 'c6', 'd3',
+        self.assertEqual(moves, {'b5', 'c4', 'c5', 'c6', 'd3',
                                  'd4', 'd6', 'e4', 'e5', 'e6',
-                                 'f5'])
+                                 'f5'})
     
     def test_black_queen(self):
         b = Board("rnb.kbnr", #8
@@ -504,9 +471,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('a5')
-        self.assertEqual(moves, ['a2', 'a3', 'a4', 'a6', 'b4',
+        self.assertEqual(moves, {'a2', 'a3', 'a4', 'a6', 'b4',
                                  'b5', 'b6', 'c3', 'c7', 'd2',
-                                 'd8'])
+                                 'd8'})
     
     
     def test_black_queen_start(self):
@@ -521,7 +488,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('d8')
-        self.assertEqual(moves, [])
+        self.assertEqual(moves, set())
     
     def test_black_queen_attack(self):
         b = Board(".nbqkbnr", #8
@@ -535,9 +502,9 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('d5')
-        self.assertEqual(moves, ['b5', 'c4', 'c5', 'c6',
+        self.assertEqual(moves, {'b5', 'c4', 'c5', 'c6',
                                  'd3', 'd4', 'd6', 'e4',
-                                 'e5', 'e6', 'f5'])
+                                 'e5', 'e6', 'f5'})
 
 #my attempts at check
 ##################################################################
@@ -594,6 +561,11 @@ class Board(object):
         piece_class = piece_classes[code.lower()]
         color = White if code.isupper() else Black
         piece = piece_class(color)  # TODO: detect what the piece really is
+        # if hasattr(piece, 'valid_moves')
+        if isinstance(piece, (Queen, Rook, Bishop)):
+            return set(piece.valid_moves(board, square, piece.color, 12))
+		if isinstance(piece, King):
+			return set(piece.valid_moves(board, square, piece.color, 12))
         moves = []
         for column in column_names:
             x2 = column_names.index(column)
@@ -611,7 +583,6 @@ class Board(object):
         piece = piece_class(color)
         square = Square(piece)
         return square
-	
 
 
 def return_none(color):
@@ -626,3 +597,4 @@ piece_classes = {
     'p': Pawn,
     '.': return_none,
     }
+

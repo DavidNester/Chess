@@ -3,7 +3,7 @@ from BoardSquare import Colors, White, Black
 
 class Knight(ChessPiece):
     
-    
+    directions = 
     def __init__(self,color):
         super(Knight,self).__init__(Knight,color)
     
