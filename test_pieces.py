@@ -1,7 +1,6 @@
 import pieces
 import unittest
 from BoardSquare import Black, White
-from pawn import Pawn
 
 piece_functions = {
     'k': pieces.king_moves,
@@ -9,7 +8,7 @@ piece_functions = {
     'b': pieces.bishop_moves,
     'r': pieces.rook_moves,
     'n': pieces.knight_moves,
-    # 'p': Pawn,
+    'p': pieces.pawn_moves,
     # '.': return_none,
     }
 
@@ -565,41 +564,13 @@ class Board(object):
         x = column_names.index(letter)
         code = self.rows[y][x]
         color = White if code.isupper() else Black
-        if code.lower() in piece_functions:
-            get_moves = piece_functions[code.lower()]
-            return set(get_moves(board, square, color))
-        piece_class = piece_classes[code.lower()]
-        piece = piece_class(color)  # TODO: detect what the piece really is
-        # if hasattr(piece, 'valid_moves')
-        if isinstance(piece, (Pawn)):
-            return set(piece.valid_moves(board, square))
-        moves = []
-        for column in column_names:
-            x2 = column_names.index(column)
-            for row in row_names:
-                y2 = row_names.index(row)
-                if piece.is_valid_move(board, y,x, y2,x2, piece.color, 12):
-                    moves.append(column + row)
-        return moves
+        get_moves = piece_functions[code.lower()]
+        return set(get_moves(board, square, color))
 
     def color_at(self, x, y):
         code = self.rows[y][x]
         return None if code == '.' else White if code.isupper() else Black
 
-    def __getitem__(self, yx_coordinate):
-        y, x = yx_coordinate
-        code = self.rows[y][x]
-        piece_class = piece_classes[code.lower()]
-        color = White if code.isupper() else Black
-        piece = piece_class(color)
-        square = Square(piece)
-        return square
-
 
 def return_none(color):
     return None
-
-piece_classes = {
-    'p': Pawn,
-    '.': return_none,
-    }

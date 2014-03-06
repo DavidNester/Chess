@@ -1,3 +1,4 @@
+from BoardSquare import Black, White
 
 n = ( 0, +1)
 s = ( 0, -1)
@@ -42,6 +43,33 @@ def knight_moves(board, square, color):
                 if can_move_to(board, color, x + dx, y + dy):
                     file = column_names[x + dx]
                     rank = row_names[y + dy]
+                    yield file + rank
+
+def pawn_moves(board, square, color):
+    column, row = square
+    x = column_names.index(column)
+    y = row_names.index(row)
+    dy = +1 if color == White else -1
+    for dx in -1, +1:
+        x2 = x + dx
+        y2 = y + dy
+        if can_move_to(board, color, x2, y2):
+            if board.color_at(x2, y2) is not None:
+                file = column_names[x2]
+                rank = row_names[y2]
+                yield file + rank
+    x2 = x
+    y2 = y + dy
+    if can_move_to(board, color, x2, y2):
+        if board.color_at(x2, y2) is None:
+            file = column_names[x2]
+            rank = row_names[y2]
+            yield file + rank
+            y2 = y2 + dy
+            if y in (1, 6) and can_move_to(board, color, x2, y2):
+                if board.color_at(x2, y2) is None:
+                    file = column_names[x2]
+                    rank = row_names[y2]
                     yield file + rank
 
 def valid_moves(board, square, color, directions):
