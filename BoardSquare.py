@@ -1,6 +1,6 @@
 #enum ChessColors (white, black)
-White = 'W'
-Black = 'B'
+White = 'WHITE'
+Black = 'BLACK'
 Colors = ['White','Black']
 
 class BoardSquare(object):

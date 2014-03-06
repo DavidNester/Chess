@@ -20,8 +20,8 @@ def king_go(board, color, direction, x, y):
         y += dy
         if not (0 <= x < 8 and 0 <= y < 8):
             break
-        piece = board[y,x].ChessPiece
-        if (piece is not None) and (piece.color is color):
+        other_piece_color = board.color_at(x, y)
+        if other_piece_color == color:
             break
         yield x, y
         break
