@@ -36,11 +36,11 @@ def go(board, color, direction, x, y):
     while True:
         x += dx
         y += dy
-        if not (0 <= x < 8 and 0 <= y < 8):
-            break
-        other_piece_color = board.color_at(x, y)
-        if other_piece_color is color:
+        if not can_move_to(board, color, x, y):
             break
         yield x, y
-        if other_piece_color is not None:
-           break
+        if board.color_at(x, y) is not None:
+            break
+
+def can_move_to(board, color, x, y):
+    return 0 <= x < 8 and 0 <= y < 8 and board.color_at(x, y) is not color
