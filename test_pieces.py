@@ -1,3 +1,4 @@
+import pieces
 import unittest
 from BoardSquare import Black, White
 from King import King
@@ -560,6 +561,8 @@ class Board(object):
         code = self.rows[y][x]
         piece_class = piece_classes[code.lower()]
         color = White if code.isupper() else Black
+        if piece_class is Rook:
+            return pieces.rook_moves(board, square, color)
         piece = piece_class(color)  # TODO: detect what the piece really is
         # if hasattr(piece, 'valid_moves')
         if isinstance(piece, (Queen, Rook, Bishop, King, Pawn)):
