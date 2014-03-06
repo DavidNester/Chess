@@ -1,6 +1,6 @@
 import pieces
 import unittest
-from BoardSquare import Black, White
+from pieces import Black, White
 
 piece_functions = {
     'k': pieces.king_moves,
@@ -12,13 +12,7 @@ piece_functions = {
     # '.': return_none,
     }
 
-class Square(object):
-    """Test board square."""
-    def __init__(self, piece=None):
-        self.ChessPiece = piece
-
 class PieceTests(unittest.TestCase):
-
 
     def test_king_that_cannot_move(self):
        b = Board("rnbqkbnr", #8
@@ -563,7 +557,7 @@ class Board(object):
         y = row_names.index(number)
         x = column_names.index(letter)
         code = self.rows[y][x]
-        color = White if code.isupper() else Black
+        color = self.color_at(x, y)
         get_moves = piece_functions[code.lower()]
         return set(get_moves(board, square, color))
 

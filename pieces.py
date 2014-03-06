@@ -1,4 +1,6 @@
-from BoardSquare import Black, White
+White = 'WHITE'
+Black = 'BLACK'
+Colors = ['White','Black']
 
 n = ( 0, +1)
 s = ( 0, -1)
