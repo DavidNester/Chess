@@ -20,7 +20,7 @@ class ChessPiece(object):
     def __repr__(self):
         return '<%s %s>' % (self.color, self.__class__.__name__)
 
-    def valid_moves(self, board, position, turn, turn_number):
+    def valid_moves(self, board, position):
         """Position looks like 'a5'."""
         column, row = position
         x = column_names.index(column)

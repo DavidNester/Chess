@@ -563,7 +563,7 @@ class Board(object):
         piece = piece_class(color)  # TODO: detect what the piece really is
         # if hasattr(piece, 'valid_moves')
         if isinstance(piece, (Queen, Rook, Bishop, King, Pawn)):
-            return set(piece.valid_moves(board, square, piece.color, 12))
+            return set(piece.valid_moves(board, square))
         moves = []
         for column in column_names:
             x2 = column_names.index(column)

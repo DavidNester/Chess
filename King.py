@@ -34,7 +34,7 @@ class King(ChessPiece):
     def __init__(self,color):
         super(King, self).__init__(KING, color)
 
-    def valid_moves(self, board, position, turn, turn_number):
+    def valid_moves(self, board, position):
         column, row = position
         x = column_names.index(column)
         y = row_names.index(row)

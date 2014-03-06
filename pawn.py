@@ -61,7 +61,7 @@ class Pawn(ChessPiece):
         if self.color is Black:
             self.directions = sw, s, se
     
-    def valid_moves(self, board, position, turn, turn_number):
+    def valid_moves(self, board, position):
         column, row = position
         x = column_names.index(column)
         y = row_names.index(row)
