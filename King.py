@@ -10,6 +10,9 @@ s = ( 0, -1)
 w = (+1,  0)
 e = (-1,  0)
 
+column_names = 'abcdefgh'
+row_names = '12345678'
+
 def king_go(board, color, direction, x, y):
     dx, dy = direction
     while True:
@@ -21,39 +24,23 @@ def king_go(board, color, direction, x, y):
         if (piece is not None) and (piece.color is color):
             break
         yield x, y
-		break
-		
+        break
+
 class King(ChessPiece):
     
+    
     directions = n, s, e, w, nw, sw, ne, se
-	
+
     def __init__(self,color):
         super(King, self).__init__(KING, color)
-	
-	def valid_moves(self, board, position, turn, turn_number):
-		column, row = position
+
+    def valid_moves(self, board, position, turn, turn_number):
+        column, row = position
         x = column_names.index(column)
         y = row_names.index(row)
-        for direction in directions:
+        for direction in self.directions:
             for x2, y2 in king_go(board, self.color, direction, x, y):
                 file = column_names[x2]
                 rank = row_names[y2]
-                yield file + rank
-		
-    def is_valid_move(self, board,from_row,from_col,
-                    to_row,to_col,turn,turn_number):
-        if not (super(King,self).is_valid_move(board,from_row,from_col,
-                                             to_row,to_col,turn,turn_number)):
-            return False
-        if abs(to_row-from_row) > 1 or abs(to_col-from_col) > 1:
-            return False
-        #Wasnt sure about translation of next line
-        other_piece = board[to_row,to_col].ChessPiece
-        if other_piece is None:
-            return True
-        if other_piece.color != self.color:
-            return True
-        return False        
-    
-        
-    
+                yield file + rank  
+

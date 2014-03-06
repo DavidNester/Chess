@@ -12,9 +12,9 @@ e = (-1,  0)
 
 class Queen(ChessPiece):
 
-	directions = n, s, e, w, nw, sw, ne, se
-    
-	def __init__(self,color):
+    directions = n, s, e, w, nw, sw, ne, se
+
+    def __init__(self,color):
         super(Queen,self).__init__(Queen,color)
 
     
