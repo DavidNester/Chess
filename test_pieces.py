@@ -3,14 +3,13 @@ import unittest
 from BoardSquare import Black, White
 from King import King
 from pawn import Pawn
-from Knight import Knight
 
 piece_functions = {
     # 'k': King,
     'q': pieces.queen_moves,
     'b': pieces.bishop_moves,
-    # 'n': Knight,
     'r': pieces.rook_moves,
+    'n': pieces.knight_moves,
     # 'p': Pawn,
     # '.': return_none,
     }
@@ -176,7 +175,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c3')
-        self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
+        self.assertEqual(moves, {'a4', 'b1', 'b5', 'd5', 'e4'})
 
     def test_white_knight_start(self):
         b = Board("rnbqkbnr", #8
@@ -190,7 +189,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('b1')
-        self.assertEqual(moves, ['a3', 'c3'])
+        self.assertEqual(moves, {'a3', 'c3'})
 
     def test_white_knight_attack(self):
         b = Board("rnbqkbnr", #8
@@ -204,7 +203,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c3')
-        self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
+        self.assertEqual(moves, {'a4', 'b1', 'b5', 'd5', 'e4'})
         
     def test_black_knight(self):
         b = Board("r.bqkbnr", #8
@@ -218,7 +217,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c6')
-        self.assertEqual(moves, ['a5', 'b4', 'b8', 'd4', 'e5'])
+        self.assertEqual(moves, {'a5', 'b4', 'b8', 'd4', 'e5'})
 
 
     def test_black_knight_start(self):
@@ -233,7 +232,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('b8')
-        self.assertEqual(moves, ['a6', 'c6'])
+        self.assertEqual(moves, {'a6', 'c6'})
     
     def test_black_knight_attack(self):
         b = Board("r.bqkbnr", #8
@@ -247,7 +246,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c6')
-        self.assertEqual(moves, ['a5', 'b4', 'b8', 'd4', 'e5'])
+        self.assertEqual(moves, {'a5', 'b4', 'b8', 'd4', 'e5'})
 
     def test_white_bishop(self):
         b = Board("rnbqkbnr", #8
@@ -569,7 +568,7 @@ class Board(object):
         color = White if code.isupper() else Black
         if code.lower() in piece_functions:
             get_moves = piece_functions[code.lower()]
-            return get_moves(board, square, color)
+            return set(get_moves(board, square, color))
         piece_class = piece_classes[code.lower()]
         piece = piece_class(color)  # TODO: detect what the piece really is
         # if hasattr(piece, 'valid_moves')
@@ -603,7 +602,6 @@ def return_none(color):
 
 piece_classes = {
     'k': King,
-    'n': Knight,
     'p': Pawn,
     '.': return_none,
     }

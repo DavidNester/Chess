@@ -20,6 +20,18 @@ def rook_moves(board, square, color):
 def bishop_moves(board, square, color):
     return set(valid_moves(board, square, color, [ne, se, nw, sw]))
 
+def knight_moves(board, square, color):
+    column, row = square
+    x = column_names.index(column)
+    y = row_names.index(row)
+    for a, b in (1, 2), (2, 1):
+        for dx in -a, a:
+            for dy in -b, b:
+                if can_move_to(board, color, x + dx, y + dy):
+                    file = column_names[x + dx]
+                    rank = row_names[y + dy]
+                    yield file + rank
+
 def valid_moves(board, square, color, directions):
     """Square looks like 'a5'."""
     column, row = square
