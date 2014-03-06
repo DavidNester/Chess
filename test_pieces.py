@@ -6,7 +6,16 @@ from pawn import Pawn
 from Queen import Queen
 from Knight import Knight
 from bishop import Bishop
-from Rook import Rook
+
+piece_functions = {
+    # 'k': King,
+    # 'q': Queen,
+    # 'b': Bishop,
+    # 'n': Knight,
+    'r': pieces.rook_moves,
+    # 'p': Pawn,
+    # '.': return_none,
+    }
 
 class Square(object):
     """Test board square."""
@@ -559,13 +568,14 @@ class Board(object):
         y = row_names.index(number)
         x = column_names.index(letter)
         code = self.rows[y][x]
-        piece_class = piece_classes[code.lower()]
         color = White if code.isupper() else Black
-        if piece_class is Rook:
-            return pieces.rook_moves(board, square, color)
+        if code.lower() in piece_functions:
+            get_moves = piece_functions[code.lower()]
+            return get_moves(board, square, color)
+        piece_class = piece_classes[code.lower()]
         piece = piece_class(color)  # TODO: detect what the piece really is
         # if hasattr(piece, 'valid_moves')
-        if isinstance(piece, (Queen, Rook, Bishop, King, Pawn)):
+        if isinstance(piece, (Queen, Bishop, King, Pawn)):
             return set(piece.valid_moves(board, square))
         moves = []
         for column in column_names:
@@ -594,8 +604,6 @@ piece_classes = {
     'q': Queen,
     'b': Bishop,
     'n': Knight,
-    'r': Rook,
     'p': Pawn,
     '.': return_none,
     }
-
