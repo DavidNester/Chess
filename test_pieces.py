@@ -1,11 +1,10 @@
 import pieces
 import unittest
 from BoardSquare import Black, White
-from King import King
 from pawn import Pawn
 
 piece_functions = {
-    # 'k': King,
+    'k': pieces.king_moves,
     'q': pieces.queen_moves,
     'b': pieces.bishop_moves,
     'r': pieces.rook_moves,
@@ -572,7 +571,7 @@ class Board(object):
         piece_class = piece_classes[code.lower()]
         piece = piece_class(color)  # TODO: detect what the piece really is
         # if hasattr(piece, 'valid_moves')
-        if isinstance(piece, (King, Pawn)):
+        if isinstance(piece, (Pawn)):
             return set(piece.valid_moves(board, square))
         moves = []
         for column in column_names:
@@ -601,7 +600,6 @@ def return_none(color):
     return None
 
 piece_classes = {
-    'k': King,
     'p': Pawn,
     '.': return_none,
     }

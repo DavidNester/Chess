@@ -11,6 +11,18 @@ ne = (+1,  +1)
 column_names = 'abcdefgh'
 row_names = '12345678'
 
+def king_moves(board, square, color):
+    column, row = square
+    x = column_names.index(column)
+    y = row_names.index(row)
+    for dx in -1, 0, 1:
+        for dy in -1, 0, 1:
+            if dx or dy:
+                if can_move_to(board, color, x + dx, y + dy):
+                    file = column_names[x + dx]
+                    rank = row_names[y + dy]
+                    yield file + rank
+
 def queen_moves(board, square, color):
     return set(valid_moves(board, square, color, [n, s, e, w, ne, se, nw, sw]))
 
