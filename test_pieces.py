@@ -537,11 +537,6 @@ def move_controller(self, board, from_row, from_col, to_row, to_col, turn):
         else:
             turn = White
 
-def king_location(self, board, turn):
-    for column in column_names:
-        for row in row_names:
-            if board[row,column].ChessPiece == King(turn):
-                return "%s" % (column,row)
 ####################################################################
 
 column_names = 'abcdefgh'
@@ -564,7 +559,25 @@ class Board(object):
     def color_at(self, x, y):
         code = self.rows[y][x]
         return None if code == '.' else White if code.isupper() else Black
+    
+    #assuming the move is already shown on the board
+    def in_check(self, color):
+        king_col, king_row = king_location(board, color)
+        for column in column_names:
+            x2 = column_names.index(column)
+            for row in row_names:
+                y2 = row_names.index(row)
+                if self.rows[column][row].IsUpper():
+                    
+                    return True
+    return False
+                
 
+    def king_location(self, board, turn):
+        for column in column_names:
+            for row in row_names:
+                if self.rows[column][row] == 'K' if turn == White else 'k':
+                    return "%s" % (column,row)
 
 def return_none(color):
     return None
