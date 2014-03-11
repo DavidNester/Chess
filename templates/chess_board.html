@@ -1,0 +1,16 @@
+<html>
+  <body>
+    <table>
+    <tr>
+      <th>a</th><th>b</th><th>c</th><th>d</th>
+      <th>e</th><th>f</th><th>g</th><th>h</th>
+    </tr>
+    {% for row in board %}
+      <tr>
+        {% for char in row %}
+          <td>{{ char }}</td>
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </body>
+</html>

@@ -1,19 +1,18 @@
+import pieces
 import unittest
-from BoardSquare import Black, White
-from King import King
-from pawn import Pawn
-from Queen import Queen
-from Knight import Knight
-from bishop import Bishop
-from Rook import Rook
+from pieces import Black, White
 
-class Square(object):
-    """Test board square."""
-    def __init__(self, piece=None):
-        self.ChessPiece = piece
+piece_functions = {
+    'k': pieces.king_moves,
+    'q': pieces.queen_moves,
+    'b': pieces.bishop_moves,
+    'r': pieces.rook_moves,
+    'n': pieces.knight_moves,
+    'p': pieces.pawn_moves,
+    # '.': return_none,
+    }
 
 class PieceTests(unittest.TestCase):
-
 
     def test_king_that_cannot_move(self):
        b = Board("rnbqkbnr", #8
@@ -168,7 +167,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c3')
-        self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
+        self.assertEqual(moves, {'a4', 'b1', 'b5', 'd5', 'e4'})
 
     def test_white_knight_start(self):
         b = Board("rnbqkbnr", #8
@@ -182,7 +181,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('b1')
-        self.assertEqual(moves, ['a3', 'c3'])
+        self.assertEqual(moves, {'a3', 'c3'})
 
     def test_white_knight_attack(self):
         b = Board("rnbqkbnr", #8
@@ -196,7 +195,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c3')
-        self.assertEqual(moves, ['a4', 'b1', 'b5', 'd5', 'e4'])
+        self.assertEqual(moves, {'a4', 'b1', 'b5', 'd5', 'e4'})
         
     def test_black_knight(self):
         b = Board("r.bqkbnr", #8
@@ -210,7 +209,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c6')
-        self.assertEqual(moves, ['a5', 'b4', 'b8', 'd4', 'e5'])
+        self.assertEqual(moves, {'a5', 'b4', 'b8', 'd4', 'e5'})
 
 
     def test_black_knight_start(self):
@@ -225,7 +224,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('b8')
-        self.assertEqual(moves, ['a6', 'c6'])
+        self.assertEqual(moves, {'a6', 'c6'})
     
     def test_black_knight_attack(self):
         b = Board("r.bqkbnr", #8
@@ -239,7 +238,7 @@ class PieceTests(unittest.TestCase):
                   #abcdefgh
                   )
         moves = b.valid_moves('c6')
-        self.assertEqual(moves, ['a5', 'b4', 'b8', 'd4', 'e5'])
+        self.assertEqual(moves, {'a5', 'b4', 'b8', 'd4', 'e5'})
 
     def test_white_bishop(self):
         b = Board("rnbqkbnr", #8
@@ -558,41 +557,14 @@ class Board(object):
         y = row_names.index(number)
         x = column_names.index(letter)
         code = self.rows[y][x]
-        piece_class = piece_classes[code.lower()]
-        color = White if code.isupper() else Black
-        piece = piece_class(color)  # TODO: detect what the piece really is
-        # if hasattr(piece, 'valid_moves')
-        if isinstance(piece, (Queen, Rook, Bishop, King, Pawn)):
-            return set(piece.valid_moves(board, square, piece.color, 12))
-        moves = []
-        for column in column_names:
-            x2 = column_names.index(column)
-            for row in row_names:
-                y2 = row_names.index(row)
-                if piece.is_valid_move(board, y,x, y2,x2, piece.color, 12):
-                    moves.append(column + row)
-        return moves
+        color = self.color_at(x, y)
+        get_moves = piece_functions[code.lower()]
+        return set(get_moves(board, square, color))
 
-    def __getitem__(self, yx_coordinate):
-        y, x = yx_coordinate
+    def color_at(self, x, y):
         code = self.rows[y][x]
-        piece_class = piece_classes[code.lower()]
-        color = White if code.isupper() else Black
-        piece = piece_class(color)
-        square = Square(piece)
-        return square
+        return None if code == '.' else White if code.isupper() else Black
 
 
 def return_none(color):
     return None
-
-piece_classes = {
-    'k': King,
-    'q': Queen,
-    'b': Bishop,
-    'n': Knight,
-    'r': Rook,
-    'p': Pawn,
-    '.': return_none,
-    }
-
