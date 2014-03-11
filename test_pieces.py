@@ -507,11 +507,11 @@ class PieceTests(unittest.TestCase):
 
 #my attempts at check
 ##################################################################
-def make_move(self, board, from_row, from_col, to_row, to_col):
+def make_move(board, from_row, from_col, to_row, to_col):
     board[to_row,to_col].ChessPiece = board[from_row, from_col].ChessPiece
     board[from_row, from_col].ChessPiece = None
 
-def check_for_check(self, board, turn):
+def check_for_check(board, turn):
     king_col, king_row = king_location(board, turn)
     for column in column_names:
         x2 = column_names.index(column)
@@ -524,7 +524,7 @@ def check_for_check(self, board, turn):
                     return True
     return False
 
-def move_controller(self, board, from_row, from_col, to_row, to_col, turn):
+def move_controller(board, from_row, from_col, to_row, to_col, turn):
     replaced_piece = board[to_row,to_col].ChessPiece
     make_move(board, from_row, from_col, to_row, to_col)
     if check_for_check:
@@ -563,21 +563,27 @@ class Board(object):
     #assuming the move is already shown on the board
     def in_check(self, color):
         king_col, king_row = king_location(board, color)
+        square = '%s' % (column_names[king_col],row_names[king_row]) 
         for column in column_names:
             x2 = column_names.index(column)
             for row in row_names:
                 y2 = row_names.index(row)
-                if self.rows[column][row].IsUpper():
-                    
-                    return True
-    return False
-                
+                if self.rows[column][row].isupper():
+                    if color is Black:
+                        thing = set(valid_moves('%s' % (column_names[column],row_names[row]))
+                        if square is in thing:
+                            return True
+                else:
+                    thing = set(valid_moves('%s' % (column_names[column],row_names[row]))
+                    if square is in thing:
+                        return True
+        return False
 
     def king_location(self, board, turn):
         for column in column_names:
             for row in row_names:
                 if self.rows[column][row] == 'K' if turn == White else 'k':
-                    return "%s" % (column,row)
+                    return '%s' % (column,row)
 
 def return_none(color):
     return None
