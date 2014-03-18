@@ -568,14 +568,13 @@ class Board(object):
             x2 = column_names.index(column)
             for row in row_names:
                 y2 = row_names.index(row)
-                if self.rows[column][row].isupper():
-                    if color is Black:
-                        thing = set(valid_moves('%s' % (column_names[column],row_names[row]))
-                        if square is in thing:
-                            return True
-                else:
-                    thing = set(valid_moves('%s' % (column_names[column],row_names[row]))
-                    if square is in thing:
+                if self.rows[column][row].isupper() and color is Black:
+                    thing = valid_moves('%s' % (column_names[column],row_names[row])
+                    if square in thing:
+                        return True
+                if self.rows[column][row].islower() and color is White:
+                    thing = valid_moves('%s' % (column_names[column],row_names[row])
+                    if square in thing:
                         return True
         return False
 
