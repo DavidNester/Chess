@@ -505,6 +505,20 @@ class PieceTests(unittest.TestCase):
                                  'd3', 'd4', 'd6', 'e4',
                                  'e5', 'e6', 'f5'})
 
+    def test_black_king_in_check(self):
+        b = Board("rnbq.bnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "R..k....", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  ".NBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.in_check(Black)
+        self.assertEqual(moves, True)
+
 #my attempts at check
 ##################################################################
 def make_move(board, from_row, from_col, to_row, to_col):
@@ -562,27 +576,40 @@ class Board(object):
     
     #assuming the move is already shown on the board
     def in_check(self, color):
-        king_col, king_row = king_location(board, color)
-        square = '%s' % (column_names[king_col],row_names[king_row]) 
+        king_col, king_row = self.king_location(color)
+        print king_col , king_row
+        square = "%s%s" % (king_col,king_row) 
         for column in column_names:
             x2 = column_names.index(column)
             for row in row_names:
                 y2 = row_names.index(row)
-                if self.rows[column][row].isupper() and color is Black:
-                    thing = valid_moves('%s' % (column_names[column],row_names[row])
-                    if square in thing:
+                code = self.rows[x2][y2]
+                print 'The code is %s' % code
+                if code == '.':
+                    pass
+                if code.isupper() and color is Black:
+                    list_of_moves = self.valid_moves('%s%s' % (column,row))
+                    print (list_of_moves)
+                    if square in list_of_moves:
                         return True
-                if self.rows[column][row].islower() and color is White:
-                    thing = valid_moves('%s' % (column_names[column],row_names[row])
-                    if square in thing:
+                if code.islower() and color is White:
+                    list_of_moves = self.valid_moves('%s%s' % (column,row))
+                    if square in list_of_moves:
                         return True
         return False
 
-    def king_location(self, board, turn):
+    def king_location(self, turn):
         for column in column_names:
+            x2 = column_names.index(column)
             for row in row_names:
-                if self.rows[column][row] == 'K' if turn == White else 'k':
-                    return '%s' % (column,row)
+                y2 = row_names.index(row)
+                code = self.rows[x2][y2]
+                #needs to be reversed
+                print 'The king code is %s' % code 
+                if code == 'K' and turn == White:
+                    return '%s%s' % (column,row)
+                elif code == 'k':
+                    return '%s%s' % (column,row)
 
 def return_none(color):
     return None
