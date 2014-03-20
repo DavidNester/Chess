@@ -570,6 +570,24 @@ class Board(object):
         get_moves = piece_functions[code.lower()]
         return set(get_moves(board, square, color))
 
+    def _code_at_square(self, square):
+        letter, number = square
+        x = column_names.index(letter)
+        y = row_names.index(number)
+        return self.rows[y][x]
+
+    def piece_at_square(self, square):
+        code = self._code_at_square(square)
+        return code.lower()
+
+    def color_at_square(self, square):
+        code = self._code_at_square(square)
+        if code.is_upper():
+            return White
+        if code.is_lower():
+            return Black
+        return None
+
     def color_at(self, x, y):
         code = self.rows[y][x]
         return None if code == '.' else White if code.isupper() else Black
