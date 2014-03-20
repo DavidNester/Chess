@@ -519,6 +519,20 @@ class PieceTests(unittest.TestCase):
         moves = b.in_check(Black)
         self.assertEqual(moves, True)
 
+    def test_black_king_in_check(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "R.......", #5
+                  "........", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  ".NBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.in_check(Black)
+        self.assertEqual(moves, False)
+
 #my attempts at check
 ##################################################################
 def make_move(board, from_row, from_col, to_row, to_col):
@@ -595,19 +609,16 @@ class Board(object):
     #assuming the move is already shown on the board
     def in_check(self, color):
         king_col, king_row = self.king_location(color)
-        print king_col , king_row
         square = "%s%s" % (king_col,king_row) 
         for column in column_names:
             x2 = column_names.index(column)
             for row in row_names:
                 y2 = row_names.index(row)
-                code = self.rows[x2][y2]
-                print 'The code is %s' % code
+                code = self._code_at_square('%s%s' % (column, row))
                 if code == '.':
                     pass
                 if code.isupper() and color is Black:
                     list_of_moves = self.valid_moves('%s%s' % (column,row))
-                    print (list_of_moves)
                     if square in list_of_moves:
                         return True
                 if code.islower() and color is White:
@@ -621,9 +632,7 @@ class Board(object):
             x2 = column_names.index(column)
             for row in row_names:
                 y2 = row_names.index(row)
-                code = self.rows[x2][y2]
-                #needs to be reversed
-                print 'The king code is %s' % code 
+                code = self._code_at_square('%s%s' % (column, row))
                 if code == 'K' and turn == White:
                     return '%s%s' % (column,row)
                 elif code == 'k':
