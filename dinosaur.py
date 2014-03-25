@@ -12,11 +12,6 @@ def main():
     dx = 0
     dy = 0
     
-    for i in range(1,8):
-        for j in range(1,8):
-            pygame.draw.rect(screen, (0,0,0), (20*i,20*j,20,20), 1)
-    pygame.display.update()
-    
     while True:
         right = True
         for event in pygame.event.get():
@@ -43,6 +38,12 @@ def main():
         
         screen.fill((255, 255, 255))
             
+        for i in range(1,8):
+            for j in range(1,8):
+                filled = (i + j) % 2
+                pygame.draw.rect(screen, (0,0,0), (20*i,20*j,20,20), filled)
+        # pygame.display.update()
+    
         screen.blit(dino, (x, y))
 
         pygame.display.flip()
