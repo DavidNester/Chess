@@ -639,12 +639,10 @@ class Board(object):
         king_col, king_row = self.king_location(color)
         square = "%s%s" % (king_col,king_row) 
         for column in column_names:
-            x2 = column_names.index(column)
             for row in row_names:
-                y2 = row_names.index(row)
                 code = self._code_at_square('%s%s' % (column, row))
                 if code == '.':
-                    pass
+                    continue
                 if code.isupper() and color is Black:
                     list_of_moves = self.valid_moves('%s%s' % (column,row))
                     if square in list_of_moves:
@@ -657,9 +655,7 @@ class Board(object):
 
     def king_location(self, turn):
         for column in column_names:
-            x2 = column_names.index(column)
             for row in row_names:
-                y2 = row_names.index(row)
                 code = self._code_at_square('%s%s' % (column, row))
                 if code == 'K' and turn == White:
                     return '%s%s' % (column,row)
