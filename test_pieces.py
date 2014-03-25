@@ -519,18 +519,46 @@ class PieceTests(unittest.TestCase):
         moves = b.in_check(Black)
         self.assertEqual(moves, True)
 
-    def test_black_king_in_check(self):
+    def test_black_king_not_in_check(self):
         b = Board("rnbqkbnr", #8
                   "pppppppp", #7
                   "........", #6
                   "R.......", #5
                   "........", #4
-                  "........", #3
+                  "........", #3       
                   "PPPPPPPP", #2
                   ".NBQKBNR", #1
                   #abcdefgh
                   )
         moves = b.in_check(Black)
+        self.assertEqual(moves, False)
+
+    def test_white_king_in_check(self):
+        b = Board(".nbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "........", #5
+                  "r...K...", #4
+                  "........", #3
+                  "PPPPPPPP", #2
+                  "RNBQ.BNR", #1
+                  #abcdefgh
+                  )
+        moves = b.in_check(White)
+        self.assertEqual(moves, True)
+
+    def test_white_king_not_in_check(self):
+        b = Board("rnbqkbnr", #8
+                  "pppppppp", #7
+                  "........", #6
+                  "R.......", #5
+                  "........", #4
+                  "........", #3       
+                  "PPPPPPPP", #2
+                  ".NBQKBNR", #1
+                  #abcdefgh
+                  )
+        moves = b.in_check(White)
         self.assertEqual(moves, False)
 
 #my attempts at check
