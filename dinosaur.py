@@ -2,10 +2,28 @@
 import pygame, sys
 from pygame import constants as c
 
+# Shell script for converting images:
+# for filename in *.ico; do name=$(basename $filename .ico);
+# convert $name.ico -type truecolormatte PNG32:$name.png;
+# mv $name-0.png $name.png; rm *-[12345].png; done
+
 def main():
     screen = pygame.display.set_mode((800, 800))
     clock = pygame.time.Clock()
     dino = pygame.image.load('tyrannosaur.png')
+    piece_images = {}
+    for color, method in ('White', str.upper), ('Black', str.lower):
+        for letter, name in zip('pnbrkq', ['Pawn', 'Knight', 'Bishop', 'Rook',
+                                           'King', 'Queen']):
+            filename = 'Chess Icons/{}_{}.png'.format(color, name)
+            image = pygame.image.load(filename)
+            image = image.convert_alpha()
+            image = pygame.transform.smoothscale(image, (76, 76))
+            piece_images[method(letter)] = image
+
+    glyphs = {
+        'K': pygame.image.load('Chess Icons/Black_King.png'),
+        }
 
     x = 200
     y = 200
@@ -44,6 +62,11 @@ def main():
         # pygame.display.update()
     
         #screen.blit(dino, (x, y))
+        row = 'rnbRNB'
+        for i, letter in enumerate(row):
+            x = 80 * i + 2
+            y = 0 + 2
+            screen.blit(piece_images[letter], (x, y))
 
         pygame.display.flip()
         clock.tick(60)
