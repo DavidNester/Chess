@@ -1,0 +1,24 @@
+I:\Chess\Chess\bin\Release\Chess.exe
+I:\Chess\Chess\bin\Release\Chess.pdb
+I:\Chess\Chess\obj\x86\Release\ResolveAssemblyReference.cache
+I:\Chess\Chess\obj\x86\Release\Chess.ChessForm.resources
+I:\Chess\Chess\obj\x86\Release\Chess.Properties.Resources.resources
+I:\Chess\Chess\obj\x86\Release\ResGen.read.1.tlog
+I:\Chess\Chess\obj\x86\Release\ResGen.write.1.tlog
+I:\Chess\Chess\obj\x86\Release\Chess.exe
+I:\Chess\Chess\obj\x86\Release\Chess.pdb
+E:\Chess\Chess\obj\x86\Release\Chess.exe
+E:\Chess\Chess\obj\x86\Release\Chess.pdb
+E:\Chess\Chess\bin\Release\Chess.exe
+E:\Chess\Chess\bin\Release\Chess.pdb
+E:\Chess\Chess\obj\x86\Release\ResolveAssemblyReference.cache
+E:\Chess\Chess\obj\x86\Release\Chess.ChessForm.resources
+E:\Chess\Chess\obj\x86\Release\Chess.Properties.Resources.resources
+E:\Chess\Chess\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+E:\Chess\Chess\obj\x86\Release\ResGen.read.1.tlog
+E:\Chess\Chess\obj\x86\Release\GenerateResource-ResGen.write.1.tlog
+E:\Chess\Chess\obj\x86\Release\ResGen.write.1.tlog
+I:\Chess\Chess\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+I:\Chess\Chess\obj\x86\Release\GenerateResource-ResGen.write.1.tlog
+I:\Chess Icons\Chess\Chess\obj\x86\Release\Chess.exe
+I:\Chess Icons\Chess\Chess\obj\x86\Release\Chess.pdb

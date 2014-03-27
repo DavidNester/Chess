@@ -1,0 +1,5 @@
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Lists\Lists\bin\Debug\Lists.exe
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Lists\Lists\bin\Debug\Lists.pdb
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Lists\Lists\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Lists\Lists\obj\x86\Debug\Lists.exe
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Lists\Lists\obj\x86\Debug\Lists.pdb

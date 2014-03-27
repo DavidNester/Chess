@@ -1,0 +1,31 @@
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\bin\Debug\Chess.exe
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\bin\Debug\Chess.pdb
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\Chess.ChessForm.resources
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\Chess.Properties.Resources.resources
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\Chess.exe
+C:\Users\shellya\Desktop\Projects\CPS112\In Class\Chess\Chess\obj\x86\Debug\Chess.pdb
+E:\Chess\Chess\obj\x86\Debug\Chess.exe
+E:\Chess\Chess\obj\x86\Debug\Chess.pdb
+E:\Chess\Chess\bin\Debug\Chess.exe
+E:\Chess\Chess\bin\Debug\Chess.pdb
+E:\Chess\Chess\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Chess\Chess\obj\x86\Debug\Chess.ChessForm.resources
+E:\Chess\Chess\obj\x86\Debug\Chess.Properties.Resources.resources
+E:\Chess\Chess\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+E:\Chess\Chess\obj\x86\Debug\ResGen.read.1.tlog
+E:\Chess\Chess\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+E:\Chess\Chess\obj\x86\Debug\ResGen.write.1.tlog
+I:\Chess\Chess\obj\x86\Debug\Chess.exe
+I:\Chess\Chess\obj\x86\Debug\Chess.pdb
+I:\Chess\Chess\bin\Debug\Chess.exe
+I:\Chess\Chess\bin\Debug\Chess.pdb
+I:\Chess\Chess\obj\x86\Debug\ResolveAssemblyReference.cache
+I:\Chess\Chess\obj\x86\Debug\Chess.ChessForm.resources
+I:\Chess\Chess\obj\x86\Debug\Chess.Properties.Resources.resources
+I:\Chess\Chess\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
+I:\Chess\Chess\obj\x86\Debug\ResGen.read.1.tlog
+I:\Chess\Chess\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
+I:\Chess\Chess\obj\x86\Debug\ResGen.write.1.tlog
