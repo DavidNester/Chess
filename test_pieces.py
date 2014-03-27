@@ -624,9 +624,9 @@ class Board(object):
 
     def color_at_square(self, square):
         code = self._code_at_square(square)
-        if code.is_upper():
+        if code.isupper():
             return White
-        if code.is_lower():
+        if code.islower():
             return Black
         return None
 
@@ -636,31 +636,27 @@ class Board(object):
     
     #assuming the move is already shown on the board
     def in_check(self, color):
-        king_col, king_row = self.king_location(color)
-        square = "%s%s" % (king_col,king_row) 
+        king_square = self.king_location(color)
         for column in column_names:
             for row in row_names:
-                code = self._code_at_square('%s%s' % (column, row))
-                if code == '.':
-                    continue
-                if code.isupper() and color is Black:
-                    list_of_moves = self.valid_moves('%s%s' % (column,row))
-                    if square in list_of_moves:
-                        return True
-                if code.islower() and color is White:
-                    list_of_moves = self.valid_moves('%s%s' % (column,row))
-                    if square in list_of_moves:
+                square = '%s%s' % (column, row)
+                piece_color = self.color_at_square(square)
+                if piece_color is not None and piece_color is not color:
+                    list_of_moves = self.valid_moves(square)
+                    if king_square in list_of_moves:
                         return True
         return False
 
     def king_location(self, turn):
+        
         for column in column_names:
             for row in row_names:
-                code = self._code_at_square('%s%s' % (column, row))
+                square = '%s%s' % (column, row)
+                code = self._code_at_square(square)
                 if code == 'K' and turn == White:
-                    return '%s%s' % (column,row)
+                    return square
                 elif code == 'k':
-                    return '%s%s' % (column,row)
+                    return square
 
 def return_none(color):
     return None
