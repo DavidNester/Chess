@@ -62,10 +62,25 @@ def main():
         # pygame.display.update()
     
         #screen.blit(dino, (x, y))
-        row = 'rnbRNB'
+        row = 'rnbqkbnr'
         for i, letter in enumerate(row):
             x = 80 * i + 2
             y = 0 + 2
+            screen.blit(piece_images[letter], (x, y))
+        row = 'pppppppp'
+        for i, letter in enumerate(row):
+            x = 80 * i + 2
+            y = 80 + 2
+            screen.blit(piece_images[letter], (x, y))
+        row = 'RNBKQBNR'
+        for i, letter in enumerate(row):
+            x = 80 * i + 2
+            y = 560 + 2
+            screen.blit(piece_images[letter], (x, y))
+        row = 'PPPPPPPP'
+        for i, letter in enumerate(row):
+            x = 80 * i + 2
+            y = 480 + 2
             screen.blit(piece_images[letter], (x, y))
 
         pygame.display.flip()
