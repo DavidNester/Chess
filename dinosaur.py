@@ -72,7 +72,7 @@ def main():
             x = 80 * i + 2
             y = 80 + 2
             screen.blit(piece_images[letter], (x, y))
-        row = 'RNBKQBNR'
+        row = 'RNBQKBNR'
         for i, letter in enumerate(row):
             x = 80 * i + 2
             y = 560 + 2
