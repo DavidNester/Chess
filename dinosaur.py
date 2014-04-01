@@ -1,5 +1,6 @@
 
 import pygame, sys
+from boardlib import Board
 from pygame import constants as c
 
 # Shell script for converting images:
@@ -8,6 +9,9 @@ from pygame import constants as c
 # mv $name-0.png $name.png; rm *-[12345].png; done
 
 def main():
+    board = Board()
+    # print board.piece_at_square('a1')
+
     screen = pygame.display.set_mode((800, 800))
     clock = pygame.time.Clock()
     dino = pygame.image.load('tyrannosaur.png')
