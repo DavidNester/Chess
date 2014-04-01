@@ -1,6 +1,14 @@
 <html>
+  <head>
+    <style>
+      table.board td { height: 64px; width: 64px; }
+      img.piece { height: 64px; width: 64px; }
+      tr:nth-child(odd) td:nth-child(odd),
+      tr:nth-child(even) td:nth-child(even) { background-color: black; }
+    </style>
+  </head>
   <body>
-    <table>
+    <table class="board">
     <tr>
       <th>a</th><th>b</th><th>c</th><th>d</th>
       <th>e</th><th>f</th><th>g</th><th>h</th>
@@ -8,7 +16,15 @@
     {% for row in board %}
       <tr>
         {% for char in row %}
-          <td>{{ char }}</td>
+          <td>
+            {% if char == 'N' %}
+              <img class="piece" src="/static/White_Knight.png">
+            {% elif char == 'B' %}
+              <img class="piece" src="/static/White_Bishop.png">
+            {% else %}
+              {{ char }}
+            {% endif %}
+          </td>
         {% endfor %}
       </tr>
     {% endfor %}
