@@ -15,6 +15,17 @@ piece_functions = {
 
 class Board(object):
     def __init__(self, *rows):
+        if not rows:
+            rows = ["rnbqkbnr", #8
+                    "pppppppp", #7
+                    "........", #6
+                    "........", #5
+                    "........", #4
+                    "........", #3
+                    "PPPPPPPP", #2
+                    "RNBQKBNR", #1
+                    #abcdefgh
+                    ]
         self.rows = [list(row) for row in reversed(rows)]
 
     def valid_moves(self, square):  # 'a1'

@@ -4,6 +4,17 @@ from pieces import Black, White
 
 class PieceTests(unittest.TestCase):
 
+    def test_board_initial_position(self):
+       b = Board()
+       self.assertEqual(b.rows[7], list("rnbqkbnr"))
+       self.assertEqual(b.rows[6], list("pppppppp"))
+       self.assertEqual(b.rows[5], list("........"))
+       self.assertEqual(b.rows[4], list("........"))
+       self.assertEqual(b.rows[3], list("........"))
+       self.assertEqual(b.rows[2], list("........"))
+       self.assertEqual(b.rows[1], list("PPPPPPPP"))
+       self.assertEqual(b.rows[0], list("RNBQKBNR"))
+
     def test_king_that_cannot_move(self):
        b = Board("rnbqkbnr", #8
                  "pppppppp", #7
