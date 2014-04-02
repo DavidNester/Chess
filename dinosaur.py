@@ -14,26 +14,22 @@ def main():
 
     screen = pygame.display.set_mode((800, 800))
     clock = pygame.time.Clock()
-    dino = pygame.image.load('tyrannosaur.png')
     piece_images = {}
+
     for color, method in ('White', str.upper), ('Black', str.lower):
         for letter, name in zip('pnbrkq', ['Pawn', 'Knight', 'Bishop', 'Rook',
                                            'King', 'Queen']):
-            filename = 'Chess Icons/{}_{}.png'.format(color, name)
+            filename = 'static/{}_{}.png'.format(color, name)
             image = pygame.image.load(filename)
             image = image.convert_alpha()
             image = pygame.transform.smoothscale(image, (76, 76))
             piece_images[method(letter)] = image
 
-    glyphs = {
-        'K': pygame.image.load('Chess Icons/Black_King.png'),
-        }
-
     x = 200
     y = 200
     dx = 0
     dy = 0
-    
+
     while True:
         for event in pygame.event.get():
             if event.type == c.KEYDOWN:
