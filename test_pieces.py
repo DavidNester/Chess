@@ -15,6 +15,30 @@ class PieceTests(unittest.TestCase):
        self.assertEqual(b.rows[1], list("PPPPPPPP"))
        self.assertEqual(b.rows[0], list("RNBQKBNR"))
 
+    def test_move(self):
+        b = Board("rnbqkbnr", #8
+                 "pppppppp", #7
+                 "........", #6
+                 "........", #5
+                 "........", #4
+                 "........", #3
+                 "PPPPPPPP", #2
+                 "RNBQKBNR", #1
+                 #abcdefgh
+                 )
+        move = b.move('a2','a3')
+        moved_b = Board("rnbqkbnr", #8
+                 "pppppppp", #7
+                 "........", #6
+                 "........", #5
+                 "........", #4
+                 "P.......", #3
+                 ".PPPPPPP", #2
+                 "RNBQKBNR", #1
+                 #abcdefgh
+                 )
+        self.assertEqual(move, moved_b)
+
     def test_king_that_cannot_move(self):
        b = Board("rnbqkbnr", #8
                  "pppppppp", #7

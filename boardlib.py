@@ -28,6 +28,25 @@ class Board(object):
                     ]
         self.rows = [list(row) for row in reversed(rows)]
 
+    def move(self, from_square, to_square):
+        list_of_moves = self.valid_moves(from_square)
+        print list_of_moves
+        print to_square
+        if to_square not in list_of_moves:
+            return self
+        new_board = self
+        letter, number = from_square
+        fx = column_names.index(letter)
+        fy = row_names.index(number)
+        piece = new_board.rows[fy][fx]
+        tletter, tnumber = to_square
+        tx = column_names.index(tletter)
+        ty = row_names.index(tnumber)
+        new_board.rows[ty][tx] = piece
+        new_board.rows[fy][fx] = '.'
+        return new_board
+        
+    
     def valid_moves(self, square):  # 'a1'
         board = self
         letter, number = square
