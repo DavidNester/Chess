@@ -105,8 +105,5 @@ class Board(object):
         for column in column_names:
             for row in row_names:
                 square = '%s%s' % (column, row)
-                code = self._code_at_square(square)
-                if code == 'K' and turn == White:
-                    return square
-                elif code == 'k':
+                if self.piece_at_square(square) == 'k' and self.color_at_square(square) == turn:
                     return square
