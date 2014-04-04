@@ -37,7 +37,8 @@ class PieceTests(unittest.TestCase):
                  "RNBQKBNR", #1
                  #abcdefgh
                  )
-        self.assertEqual(move, moved_b)
+        comparison = move.__eq__(moved_b)
+        self.assertEqual(comparison, True)
 
     def test_king_that_cannot_move(self):
        b = Board("rnbqkbnr", #8

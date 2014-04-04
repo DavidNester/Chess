@@ -27,23 +27,32 @@ class Board(object):
                     #abcdefgh
                     ]
         self.rows = [list(row) for row in reversed(rows)]
+        
+    def __eq__(self, other_board):
+        return self.rows == other_board.rows
+    
+    def _print(self):
+        for item in self.rows:
+            print item
 
     def move(self, from_square, to_square):
         list_of_moves = self.valid_moves(from_square)
-        print list_of_moves
-        print to_square
         if to_square not in list_of_moves:
             return self
-        new_board = self
+        new_board = Board(self.rows)
+        new_board._print()
+        print self.__eq__(new_board)
+        self._print()
         letter, number = from_square
         fx = column_names.index(letter)
         fy = row_names.index(number)
-        piece = new_board.rows[fy][fx]
+        piece = self.rows[fy][fx]
         tletter, tnumber = to_square
         tx = column_names.index(tletter)
         ty = row_names.index(tnumber)
-        new_board.rows[ty][tx] = piece
+        #new_board.rows[ty][tx] = piece
         new_board.rows[fy][fx] = '.'
+        new_board._print()
         return new_board
         
     
