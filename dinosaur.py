@@ -83,6 +83,13 @@ def main():
             y = 480 + 2
             screen.blit(piece_images[letter], (x, y))
 
+        pygame.font.init()
+        myfont = pygame.font.SysFont("Comic Sans MS", 30)
+        label_1 = myfont.render("Chess Game", 1, (0,0,0))
+        label_2 = myfont.render("e5 -> d6", 1, (0,0,0))
+        pygame.display.set_caption("This is a chess Game")
+        screen.blit(label_1, (300,640))
+        screen.blit(label_2, (300,665))
         pygame.display.flip()
         clock.tick(60)
         #dx = dy = 0
