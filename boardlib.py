@@ -55,6 +55,8 @@ class Board(object):
         new_board._print()
         return new_board
         
+    def can_check_mate(self,color):
+        #This seems like too much work for 11:45
     
     def valid_moves(self, square):  # 'a1'
         board = self
