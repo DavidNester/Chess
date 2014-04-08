@@ -25,10 +25,8 @@ def main():
             image = pygame.transform.smoothscale(image, (76, 76))
             piece_images[method(letter)] = image
 
-    x = 200
-    y = 200
-    dx = 0
-    dy = 0
+    m = 2
+    n = 2
 
     while True:
         for event in pygame.event.get():
@@ -37,20 +35,21 @@ def main():
                     sys.exit(0)
 
                 # NEW:
-                elif event.key == c.K_RIGHT:
-                    dx = 5
-                    dy = 0
-                elif event.key == c.K_LEFT:
-                    dx = -5
-                    dy = 0 
-                elif event.key == c.K_UP:
-                    dy = -5
-                    dx = 0
-                elif event.key == c.K_DOWN:
-                    dy = 5
-                    dx = 0 
-        #x += dx
-        #y += dy
+                #elif event.key == c.K_RIGHT:
+                #    dx = 5
+                #    dy = 0
+                #elif event.key == c.K_LEFT:
+                #    dx = -5
+                #    dy = 0 
+                #elif event.key == c.K_UP:
+                #    dy = -5
+                #    dx = 0
+                #elif event.key == c.K_DOWN:
+                #    dy = 5
+                #    dx = 0 
+        d = 3
+        m += d
+        n += d
         
         
         screen.fill((255, 255, 255))
@@ -58,14 +57,15 @@ def main():
         for i in range(1,9):
             for j in range(1,9):
                 filled = (i + j) % 2
-                pygame.draw.rect(screen, (0,0,0), ((80*i)-80,(80*j)-80,80,80), not filled)
+                x = (80*i)-80
+                y = (80*j)-80
+                pygame.draw.rect(screen, (0,0,0), (x,y,80,80), not filled)
         # pygame.display.update()
-    
-        #screen.blit(dino, (x, y))
+        screen.blit(piece_images['r'] , (m, n))
         row = 'rnbqkbnr'
         for i, letter in enumerate(row):
             x = 80 * i + 2
-            y = 0 + 2
+            y = 2
             screen.blit(piece_images[letter], (x, y))
         row = 'pppppppp'
         for i, letter in enumerate(row):
