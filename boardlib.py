@@ -55,8 +55,34 @@ class Board(object):
         new_board._print()
         return new_board
         
-    def can_check_mate(self,color):
-        #This seems like too much work for 11:45
+    def how_to_check_mate(self, color):
+        if color is Black:
+            opp_color = White
+        else:
+            opp_color = Black
+        moves = list()
+        for column in column_names:
+            for row in row_names:
+                square = '%s%s' % (column, row)
+                if self.color_at_square(square) is color:
+                    for move in valid_moves(square):
+                        if self.move(square,move).in_checkmate(opp_color) is True:
+                            moves.append("%s --> %s" %(square,move))
+        return moves
+    
+    def in_checkmate(self, color):
+        king_square = self.king_location(color)
+        check = True
+        for column in column_names:
+            for row in row_names:
+                square = '%s%s' % (column, row)
+                piece_color = self.color_at_square(square)
+                if piece_color is color:
+                    list_of_moves = valid_moves(square)
+                    for move in list_of_moves:
+                        if not self.move(square,move).in_check(color):
+                            check = False
+        return check
     
     def valid_moves(self, square):  # 'a1'
         board = self
