@@ -26,6 +26,9 @@ class Board(object):
                     "RNBQKBNR", #1
                     #abcdefgh
                     ]
+        if len(rows) != 8:
+            raise ValueError('a chess board needs 8 rows but you have only'
+                             ' provided {}'.format(len(rows)))
         self.rows = [list(row) for row in reversed(rows)]
         
     def __eq__(self, other_board):
@@ -39,10 +42,9 @@ class Board(object):
         list_of_moves = self.valid_moves(from_square)
         if to_square not in list_of_moves:
             return self
-        new_board = Board(self.rows)
-        new_board._print()
-        print self.__eq__(new_board)
-        self._print()
+        new_board = Board(*reversed(self.rows))
+        #new_board._print()
+        #self._print()
         letter, number = from_square
         fx = column_names.index(letter)
         fy = row_names.index(number)
@@ -50,9 +52,8 @@ class Board(object):
         tletter, tnumber = to_square
         tx = column_names.index(tletter)
         ty = row_names.index(tnumber)
-        #new_board.rows[ty][tx] = piece
+        new_board.rows[ty][tx] = piece
         new_board.rows[fy][fx] = '.'
-        new_board._print()
         return new_board
         
     def how_to_check_mate(self, color):
