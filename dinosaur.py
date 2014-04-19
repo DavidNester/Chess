@@ -12,10 +12,10 @@ def main():
     board = Board()
     # print board.piece_at_square('a1')
 
-    screen = pygame.display.set_mode((800, 800))
+    screen = pygame.display.set_mode((1200, 800))
     clock = pygame.time.Clock()
     piece_images = {}
-
+   
     for color, method in ('White', str.upper), ('Black', str.lower):
         for letter, name in zip('pnbrkq', ['Pawn', 'Knight', 'Bishop', 'Rook',
                                            'King', 'Queen']):
@@ -53,7 +53,15 @@ def main():
         
         
         screen.fill((255, 255, 255))
-            
+        ###############3x3 2048        
+        board = Board_2048()
+        
+        for a in range(1,4):
+            for b in range(1,4):
+                e = 80*a + 800
+                f = 80*b
+                pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
+        ###############3x3 2048
         for i in range(1,9):
             for j in range(1,9):
                 filled = (i + j) % 2
@@ -97,3 +105,18 @@ def main():
 if __name__ == "__main__":
     main()
 
+class Board_2048(object):
+
+    def __init__(self, *rows):
+        if not rows:
+            rows = [[0,0,0],
+                    [0,2,0],
+                    [0,2,0]]
+        self.rows = [list(row) for row in reversed(rows)]
+
+class Tile(object):
+    
+    def __init__(self, number):
+        #image will be changed
+        self.image = None
+        self.number = number
