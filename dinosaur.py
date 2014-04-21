@@ -35,16 +35,20 @@ def main():
                     sys.exit(0)
 
                 # NEW:
-                #elif event.key == c.K_RIGHT:
+                elif event.key == c.K_RIGHT:
+                    Board_2048.move(0,1)
                 #    dx = 5
                 #    dy = 0
-                #elif event.key == c.K_LEFT:
+                elif event.key == c.K_LEFT:
+                    B0ard_2048.move(0,-1)
                 #    dx = -5
                 #    dy = 0 
-                #elif event.key == c.K_UP:
+                elif event.key == c.K_UP:
+                    Board_2048.move(1,0)
                 #    dy = -5
                 #    dx = 0
-                #elif event.key == c.K_DOWN:
+                elif event.key == c.K_DOWN:
+                    Board_2048.move(-1,0)
                 #    dy = 5
                 #    dx = 0 
         d = 3
@@ -54,7 +58,7 @@ def main():
         
         screen.fill((255, 255, 255))
         ###############3x3 2048        
-        board = Board_2048()
+        #new_board = Board_2048()
         
         for a in range(1,4):
             for b in range(1,4):
@@ -109,14 +113,30 @@ class Board_2048(object):
 
     def __init__(self, *rows):
         if not rows:
-            rows = [[0,0,0],
-                    [0,2,0],
-                    [0,2,0]]
+            a = Tile(0)
+            rows = [[a,      a,a],
+                    [a,Tile(2),a],
+                    [a,Tile(2),a]]
         self.rows = [list(row) for row in reversed(rows)]
+    
+    def move(self, vertical, horizontal):
+        if vertical == 0:
+            for i in range(0,3):
+                for j in range(0,3):
+                    index = j + horizontal
+                    if index > -1 and index < 3:
+                        if self.rows[i][index].number == self.rows[i][j].number:
+                            self.rows[i][index] = Tile(self.rows[i][index].number*2)
+                            self.row[i][j] = Tile(0)
+                        elif self.rows[i][index].number == 0:
+                            self.rows[i][index] = Tile(self.rows[i][j].number)
+                            self.row[i][j] = Tile(0)
 
 class Tile(object):
     
     def __init__(self, number):
-        #image will be changed
-        self.image = None
+        if number == 0:
+            self.image = None
+        else:
+            self.image = None#will be changed
         self.number = number
