@@ -1,6 +1,6 @@
 class Board_2048(object):
 
-    def __init__(self, *rows):
+    def __init__(self, rows=None):
         if not rows:
             a = Tile(0)
             rows = [[a,      a,a],
