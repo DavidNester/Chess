@@ -2,6 +2,7 @@
 import pygame, sys
 from boardlib import Board
 from pygame import constants as c
+from twenty48 import Board_2048, Tile
 
 # Shell script for converting images:
 # for filename in *.ico; do name=$(basename $filename .ico);
@@ -11,10 +12,12 @@ from pygame import constants as c
 def main():
     board = Board()
     # print board.piece_at_square('a1')
-
+    new_board = Board_2048()
+    new_board.print_board()
     screen = pygame.display.set_mode((1200, 800))
     clock = pygame.time.Clock()
     piece_images = {}
+    tile_images = {}
    
     for color, method in ('White', str.upper), ('Black', str.lower):
         for letter, name in zip('pnbrkq', ['Pawn', 'Knight', 'Bishop', 'Rook',
@@ -24,6 +27,13 @@ def main():
             image = image.convert_alpha()
             image = pygame.transform.smoothscale(image, (76, 76))
             piece_images[method(letter)] = image
+    
+    for number in ('2', '4', '8', '16', '32'):
+        filename = 'static/{}.jpg'.format(number)
+        nimage = pygame.image.load(filename)
+        nimage = nimage.convert_alpha()
+        nimage = pygame.transform.smoothscale(nimage, (76, 76))
+        tile_images[number] = nimage
 
     m = 2
     n = 2
@@ -36,19 +46,19 @@ def main():
 
                 # NEW:
                 elif event.key == c.K_RIGHT:
-                    Board_2048.move(0,1)
+                    new_board.move(0,1)
                 #    dx = 5
                 #    dy = 0
                 elif event.key == c.K_LEFT:
-                    B0ard_2048.move(0,-1)
+                    new_board.move(0,-1)
                 #    dx = -5
                 #    dy = 0 
                 elif event.key == c.K_UP:
-                    Board_2048.move(1,0)
+                    new_board.move(1,0)
                 #    dy = -5
                 #    dx = 0
                 elif event.key == c.K_DOWN:
-                    Board_2048.move(-1,0)
+                    new_board.move(-1,0)
                 #    dy = 5
                 #    dx = 0 
         d = 3
@@ -58,7 +68,7 @@ def main():
         
         screen.fill((255, 255, 255))
         ###############3x3 2048        
-        #new_board = Board_2048()
+        
         
         for a in range(1,4):
             for b in range(1,4):
@@ -109,34 +119,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-class Board_2048(object):
-
-    def __init__(self, *rows):
-        if not rows:
-            a = Tile(0)
-            rows = [[a,      a,a],
-                    [a,Tile(2),a],
-                    [a,Tile(2),a]]
-        self.rows = [list(row) for row in reversed(rows)]
-    
-    def move(self, vertical, horizontal):
-        if vertical == 0:
-            for i in range(0,3):
-                for j in range(0,3):
-                    index = j + horizontal
-                    if index > -1 and index < 3:
-                        if self.rows[i][index].number == self.rows[i][j].number:
-                            self.rows[i][index] = Tile(self.rows[i][index].number*2)
-                            self.row[i][j] = Tile(0)
-                        elif self.rows[i][index].number == 0:
-                            self.rows[i][index] = Tile(self.rows[i][j].number)
-                            self.row[i][j] = Tile(0)
-
-class Tile(object):
-    
-    def __init__(self, number):
-        if number == 0:
-            self.image = None
-        else:
-            self.image = None#will be changed
-        self.number = number
