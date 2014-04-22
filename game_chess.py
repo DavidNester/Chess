@@ -2,7 +2,6 @@
 import pygame, sys
 from boardlib import Board
 from pygame import constants as c
-from twenty48 import Board_2048, Tile
 
 # Shell script for converting images:
 # for filename in *.ico; do name=$(basename $filename .ico);
@@ -12,12 +11,9 @@ from twenty48 import Board_2048, Tile
 def main():
     board = Board()
     # print board.piece_at_square('a1')
-    new_board = Board_2048()
-    new_board.print_board()
     screen = pygame.display.set_mode((1200, 800))
     clock = pygame.time.Clock()
     piece_images = {}
-    tile_images = {}
    
     for color, method in ('White', str.upper), ('Black', str.lower):
         for letter, name in zip('pnbrkq', ['Pawn', 'Knight', 'Bishop', 'Rook',
@@ -28,13 +24,6 @@ def main():
             image = pygame.transform.smoothscale(image, (76, 76))
             piece_images[method(letter)] = image
     
-    for number in ('2', '4', '8', '16', '32'):
-        filename = 'static/{}.jpg'.format(number)
-        nimage = pygame.image.load(filename)
-        nimage = nimage.convert_alpha()
-        nimage = pygame.transform.smoothscale(nimage, (76, 76))
-        tile_images[number] = nimage
-
     m = 2
     n = 2
 
@@ -45,20 +34,16 @@ def main():
                     sys.exit(0)
 
                 # NEW:
-                elif event.key == c.K_RIGHT:
-                    new_board.move(0,1)
+                #elif event.key == c.K_RIGHT:
                 #    dx = 5
                 #    dy = 0
-                elif event.key == c.K_LEFT:
-                    new_board.move(0,-1)
+                #elif event.key == c.K_LEFT:
                 #    dx = -5
                 #    dy = 0 
-                elif event.key == c.K_UP:
-                    new_board.move(1,0)
+                #elif event.key == c.K_UP:
                 #    dy = -5
                 #    dx = 0
-                elif event.key == c.K_DOWN:
-                    new_board.move(-1,0)
+                #elif event.key == c.K_DOWN:
                 #    dy = 5
                 #    dx = 0 
         d = 3
@@ -67,15 +52,7 @@ def main():
         
         
         screen.fill((255, 255, 255))
-        ###############3x3 2048        
-        
-        
-        for a in range(1,4):
-            for b in range(1,4):
-                e = 80*a + 800
-                f = 80*b
-                pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
-        ###############3x3 2048
+
         for i in range(1,9):
             for j in range(1,9):
                 filled = (i + j) % 2
