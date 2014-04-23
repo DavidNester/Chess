@@ -39,15 +39,12 @@ def main():
                     new_board.move_down()
 
         screen.fill((255, 255, 255))
-        ###############3x3 2048        
-        
-        
         for a in range(1,4):
             for b in range(1,4):
                 e = (80*a)-80
                 f = (80*b)-80
                 pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
-        ###############3x3 2048
+
         row =''
         for i in range(0,3):
             row += '%s' % new_board.rows[0][i]
