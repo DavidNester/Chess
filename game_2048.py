@@ -9,12 +9,12 @@ from twenty48 import Board_2048
 # mv $name-0.png $name.png; rm *-[12345].png; done
 
 def main():
-    new_board = Board_2048()
-    print new_board.rows
+    board = Board_2048()
+    print board.rows
     screen = pygame.display.set_mode((400, 400))
     clock = pygame.time.Clock()
     tile_images = {}
-   
+    moves = list()
     for number in ('0', '2', '4', '8', '16', '32'):
         filename = 'static/{}.jpg'.format(number)
         nimage = pygame.image.load(filename)
@@ -30,13 +30,13 @@ def main():
 
                 # NEW:
                 elif event.key == c.K_RIGHT:
-                    new_board.move_right()
+                    board, moves = board.move_right()
                 elif event.key == c.K_LEFT:
-                    new_board.move_left() 
+                    board, moves = board.move_left() 
                 elif event.key == c.K_UP:
-                    new_board.move_up()
+                    board, moves = board.move_up()
                 elif event.key == c.K_DOWN:
-                    new_board.move_down()
+                    board, moves = board.move_down()
 
         screen.fill((255, 255, 255))
         for a in range(1,4):
@@ -47,21 +47,21 @@ def main():
 
         row =''
         for i in range(0,3):
-            row += '%s' % new_board.rows[0][i]
+            row += '%s' % board.rows[0][i]
         for i, letter in enumerate(row):
             x = 80 * i + 2
             y = 2
             screen.blit(tile_images[letter], (x, y))
         row =''
         for i in range(0,3):
-            row += '%s' % new_board.rows[1][i]
+            row += '%s' % board.rows[1][i]
         for i, letter in enumerate(row):
             x = 80  * i + 2
             y = 2 +80
             screen.blit(tile_images[letter], (x, y))
         row =''
         for i in range(0,3):
-            row += '%s' % new_board.rows[2][i]
+            row += '%s' % board.rows[2][i]
         for i, letter in enumerate(row):
             x = 80 * i + 2
             y = 2 + 160
