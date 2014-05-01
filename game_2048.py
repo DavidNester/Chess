@@ -32,7 +32,8 @@ def main():
                 elif event.key == c.K_RIGHT:
                     board, moves = board.move_right()
                 elif event.key == c.K_LEFT:
-                    board, moves = board.move_left() 
+                    board, moves = board.move_left()
+                    print moves
                 elif event.key == c.K_UP:
                     board, moves = board.move_up()
                 elif event.key == c.K_DOWN:
@@ -44,7 +45,7 @@ def main():
                 e = (80*a)-80
                 f = (80*b)-80
                 pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
-
+        
         row =''
         for i in range(0,3):
             row += '%s' % board.rows[0][i]

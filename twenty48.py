@@ -1,4 +1,4 @@
-from random import randint
+import random
 
 class Board_2048(object):
 
@@ -22,27 +22,31 @@ class Board_2048(object):
                 zeros = True
                 moved = False
                 combined = False#changed if moved to 4x4
-                while zeros:
-                    if index > -1 and index < 3:
-                        if new_board.rows[i][index] == 0:
-                            new_board.rows[i][index] = self.rows[i][j]
-                            new_board.rows[i][j] = 0
-                            index -= 1
-                            j -= 1
-                            moved = True
-                        elif new_board.rows[i][index] == self.rows[i][j]:
-                            if not combined:#changed if 4x4
-                                new_board.rows[i][index] = self.rows[i][index]*2
+                change = 0
+                if new_board.rows[i][j] != 0:
+                    while zeros:
+                        if index > -1 and index < 3:
+                            if new_board.rows[i][index] == 0:
+                                new_board.rows[i][index] = self.rows[i][j]
                                 new_board.rows[i][j] = 0
-                                zeros = False
+                                index -= 1
+                                j -= 1
+                                change += 1
                                 moved = True
-                                combined = True#changed if 4x4
+                            elif new_board.rows[i][index] == self.rows[i][j]:
+                                if not combined:#changed if 4x4
+                                    new_board.rows[i][index] = self.rows[i][index]*2
+                                    new_board.rows[i][j] = 0
+                                    zeros = False
+                                    moved = True
+                                    combined = True#changed if 4x4
+                                    #change -= 1
+                            else:
+                                zeros = False
                         else:
                             zeros = False
-                    else:
-                        zeros = False
-            if moved:
-                moves.append((i,j,i,index))
+                if moved:
+                    moves.append((i,j + change,i,index+change-1 ))
         new_board.add_2()
         return new_board, moves
         print new_board.rows
@@ -117,7 +121,7 @@ class Board_2048(object):
         print new_board.rows
 
     def _copy(self):
-    	return Board(self.rows)
+    	return Board_2048(self.rows)
 
     def print_board(self):
         for i in range(0,3):
@@ -127,10 +131,11 @@ class Board_2048(object):
     
     def add_2(self):
         open_spaces = self.open_spaces()
-        number = randint(0,len(open_spaces)-1)
+        number = random.randint(0,len(open_spaces)-1)
         i,j = open_spaces[number]
         new_value = 0
-        if random.random() - .9 > 0:
+        r = random.random()
+        if r - .9 > 0:
         	new_value = 4
         else:
         	new_value = 2
