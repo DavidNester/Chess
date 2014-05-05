@@ -31,13 +31,16 @@ def main():
                 # NEW:
                 elif event.key == c.K_RIGHT:
                     board, moves = board.move_right()
+                    print moves
                 elif event.key == c.K_LEFT:
                     board, moves = board.move_left()
                     print moves
                 elif event.key == c.K_UP:
                     board, moves = board.move_up()
+                    print moves
                 elif event.key == c.K_DOWN:
                     board, moves = board.move_down()
+                    print moves
 
         screen.fill((255, 255, 255))
         for a in range(1,4):
