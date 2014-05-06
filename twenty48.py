@@ -50,7 +50,7 @@ class Board_2048(object):
                             zeros = False
                 if moved:
                     moves.add((i, real, i, index+change))
-        #new_board.add_2()
+        new_board.add_2()
         return new_board, moves
     
     def move_right(self):#needs to be changed
@@ -90,7 +90,7 @@ class Board_2048(object):
                             zeros = False
                 if moved:
                     moves.add((i, real, i, index+change))
-        #new_board.add_2()
+        new_board.add_2()
         return new_board,moves
     
     def move_up(self):
@@ -130,7 +130,7 @@ class Board_2048(object):
                             zeros = False
                 if moved:
                     moves.add((real, j, index + change, j))
-        #new_board.add_2()
+        new_board.add_2()
         return new_board, moves
     
     def move_down(self):#needs to be changed
@@ -170,7 +170,7 @@ class Board_2048(object):
                             zeros = False
                 if moved:
                     moves.add((real, j, index + change, j))
-        #new_board.add_2()
+        new_board.add_2()
         return new_board, moves
 
     def _copy(self):

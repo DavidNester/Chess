@@ -11,16 +11,16 @@ from twenty48 import Board_2048
 def main():
     board = Board_2048()
     print board.rows
-    screen = pygame.display.set_mode((400, 400))
+    screen = pygame.display.set_mode((320, 320))
     clock = pygame.time.Clock()
     tile_images = {}
     moves = list()
     for number in ('0', '2', '4', '8', '16', '32'):
         filename = 'static/{}.jpg'.format(number)
-        nimage = pygame.image.load(filename)
-        nimage = nimage.convert_alpha()
-        nimage = pygame.transform.smoothscale(nimage, (76, 76))
-        tile_images[number] = nimage
+        image = pygame.image.load(filename)
+        image = image.convert_alpha()
+        image = pygame.transform.smoothscale(image, (76, 76))
+        tile_images[number] = image
 
     while True:
         for event in pygame.event.get():
@@ -41,7 +41,9 @@ def main():
                 elif event.key == c.K_DOWN:
                     board, moves = board.move_down()
                     print moves
-
+        for item in moves:
+            fy, fx, dy, dx = item
+            print fy,fx,dy,dx
         screen.fill((255, 255, 255))
         for a in range(1,4):
             for b in range(1,4):
@@ -72,6 +74,7 @@ def main():
             screen.blit(tile_images[letter], (x, y))
         pygame.display.flip()
         clock.tick(60)
+        moves = set()#to prevent a crazy loop
 
 if __name__ == "__main__":
     main()
