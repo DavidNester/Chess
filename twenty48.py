@@ -12,12 +12,8 @@ class Board_2048(object):
             self.add_2()
         else:
             self.rows = list(rows)
-    
-    def move_left(self):
-        ilist = range(0,3)
-        jlist = range(0,3)
-        jstep = -1
 
+    def _move(self, ilist, jlist, jstep):
         moves = set()
         new_board = self._copy()
         for i in ilist:
@@ -56,51 +52,19 @@ class Board_2048(object):
                     moves.add((i, real, i, index+change))
         new_board.add_2()
         return new_board, moves
-    
+
+    def move_left(self):
+        ilist = range(0,3)
+        jlist = range(0,3)
+        jstep = -1
+        return self._move(ilist, jlist, jstep)
+
     def move_right(self):#needs to be changed
         ilist = backwards
         jlist = backwards
         jstep = 1
+        return self._move(ilist, jlist, jstep)
 
-        moves = set()
-        new_board = self._copy()
-        for i in ilist:
-            combined = False#changed if moved to 4x4
-            for j in jlist:
-                index = j + jstep
-                real = j
-                zeros = True
-                moved = False
-                change = 0
-                if new_board.rows[i][j] != 0:
-                    while zeros:
-                        if index > -1 and index < 3:
-                            if new_board.rows[i][index] == 0:
-                                new_board.rows[i][index] = self.rows[i][j]
-                                new_board.rows[i][j] = 0
-                                index += jstep
-                                j += jstep
-                                change = -jstep
-                                moved = True
-                            elif new_board.rows[i][index] == self.rows[i][j]:
-                                if not combined:
-                                    new_board.rows[i][index] = self.rows[i][index]*2
-                                    new_board.rows[i][j] = 0
-                                    zeros = False
-                                    moved = True
-                                    combined = True#changed if 4x4
-                                    change = 0
-                                else:
-                                    zeros = False
-                            else:
-                                zeros = False
-                        else:
-                            zeros = False
-                if moved:
-                    moves.add((i, real, i, index+change))
-        new_board.add_2()
-        return new_board,moves
-    
     def move_up(self):
         moves = set()
         new_board = self._copy()
