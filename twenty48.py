@@ -14,7 +14,7 @@ class Board_2048(object):
             self.rows = list(rows)
     
     def move_left(self):
-        moves = list()
+        moves = set()
         new_board = self._copy()
         for i in range(0,3):
             combined = False#changed if moved to 4x4
@@ -49,12 +49,12 @@ class Board_2048(object):
                         else:
                             zeros = False
                 if moved:
-                    moves.append((i, real, i, index+change))
-        new_board.add_2()
+                    moves.add((i, real, i, index+change))
+        #new_board.add_2()
         return new_board, moves
     
     def move_right(self):#needs to be changed
-        moves = list()
+        moves = set()
         new_board = self._copy()
         for i in backwards:
             combined = False#changed if moved to 4x4
@@ -89,12 +89,12 @@ class Board_2048(object):
                         else:
                             zeros = False
                 if moved:
-                    moves.append((i, real, i, index+change))
-        new_board.add_2()
+                    moves.add((i, real, i, index+change))
+        #new_board.add_2()
         return new_board,moves
     
     def move_up(self):
-        moves = list()
+        moves = set()
         new_board = self._copy()
         for j in range(0,3):
             combined = False
@@ -129,12 +129,12 @@ class Board_2048(object):
                         else:
                             zeros = False
                 if moved:
-                    moves.append((real, j, index + change, j))
-        new_board.add_2()
+                    moves.add((real, j, index + change, j))
+        #new_board.add_2()
         return new_board, moves
     
     def move_down(self):#needs to be changed
-        moves = list()
+        moves = set()
         new_board = self._copy()
         for j in backwards:
             combined = False
@@ -169,8 +169,8 @@ class Board_2048(object):
                         else:
                             zeros = False
                 if moved:
-                    moves.append((real, j, index + change, j))
-        new_board.add_2()
+                    moves.add((real, j, index + change, j))
+        #new_board.add_2()
         return new_board, moves
 
     def _copy(self):
