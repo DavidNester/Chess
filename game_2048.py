@@ -13,6 +13,8 @@ def main():
     print board.rows
     screen = pygame.display.set_mode((320, 320))
     clock = pygame.time.Clock()
+    score = 0
+    add_score = 0
     tile_images = {}
     moves = list()
     for number in ('0', '2', '4', '8', '16', '32', '64', '128', '256'):
@@ -30,20 +32,18 @@ def main():
 
                 # NEW:
                 elif event.key == c.K_RIGHT:
-                    board, moves = board.move_right()
+                    board, moves, add_score = board.move_right()
                     print moves
                 elif event.key == c.K_LEFT:
-                    board, moves = board.move_left()
+                    board, moves, add_score = board.move_left()
                     print moves
                 elif event.key == c.K_UP:
-                    board, moves = board.move_up()
+                    board, moves, add_score = board.move_up()
                     print moves
                 elif event.key == c.K_DOWN:
-                    board, moves = board.move_down()
+                    board, moves, add_score = board.move_down()
                     print moves
-        for item in moves:
-            fy, fx, dy, dx = item
-            print fy,fx,dy,dx
+        score += add_score
         screen.fill((255, 255, 255))
         for a in range(1,4):
             for b in range(1,4):
@@ -59,10 +59,15 @@ def main():
                 j += 1
                 number = '%s' % number
                 screen.blit(tile_images[number], (x, y))
-        
+        label = 'Score: %s' % score
+        pygame.font.init()
+        myfont = pygame.font.SysFont("Comic Sans MS", 30)
+        label_1 = myfont.render(label, 1, (0,0,0))
+        screen.blit(label_1, (2,250))
         pygame.display.flip()
         clock.tick(60)
         moves = set()#to prevent a crazy loop
+        add_score = 0
 
 if __name__ == "__main__":
     main()
