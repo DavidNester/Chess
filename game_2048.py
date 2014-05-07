@@ -15,7 +15,7 @@ def main():
     clock = pygame.time.Clock()
     tile_images = {}
     moves = list()
-    for number in ('0', '2', '4', '8', '16', '32'):
+    for number in ('0', '2', '4', '8', '16', '32', '64', '128', '256'):
         filename = 'static/{}.jpg'.format(number)
         image = pygame.image.load(filename)
         image = image.convert_alpha()
@@ -51,27 +51,15 @@ def main():
                 f = (80*b)-80
                 pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
         
-        row =''
         for i in range(0,3):
-            row += '%s' % board.rows[0][i]
-        for i, letter in enumerate(row):
-            x = 80 * i + 2
-            y = 2
-            screen.blit(tile_images[letter], (x, y))
-        row =''
-        for i in range(0,3):
-            row += '%s' % board.rows[1][i]
-        for i, letter in enumerate(row):
-            x = 80  * i + 2
-            y = 2 +80
-            screen.blit(tile_images[letter], (x, y))
-        row =''
-        for i in range(0,3):
-            row += '%s' % board.rows[2][i]
-        for i, letter in enumerate(row):
-            x = 80 * i + 2
-            y = 2 + 160
-            screen.blit(tile_images[letter], (x, y))
+            j = 0
+            for number in board.rows[i]:
+                x = 80 * j + 2
+                y = 80 * i + 2
+                j += 1
+                number = '%s' % number
+                screen.blit(tile_images[number], (x, y))
+        
         pygame.display.flip()
         clock.tick(60)
         moves = set()#to prevent a crazy loop
