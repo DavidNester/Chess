@@ -13,14 +13,13 @@ class Board_2048(object):
         else:
             self.rows = list(rows)
 
-    def _move(self, ilist, jlist, jstep):
+    def _moveh(self, loop_list, jstep):
         score = 0
         moves = set()
         new_board = self._copy()
-        bmoved = False
-        for i in ilist:
+        for i in loop_list:
             combined = False#changed if moved to 4x4
-            for j in jlist:
+            for j in loop_list:
                 index = j + jstep
                 real = j
                 zeros = True
@@ -52,35 +51,29 @@ class Board_2048(object):
                             zeros = False
                 if moved:
                     moves.add((i, real, i, index+change))
-                    bmoved = True
-        new_board.add_2()
-        if not bmoved:
-            return self, set(), 0
+        if moves == set():
+            return self, set(),0
         else:
+            new_board.add_2()
             return new_board, moves, score
 
     def move_left(self):
-        ilist = range(0,3)
-        jlist = range(0,3)
+        loop_list = range(0,3)
         jstep = -1
-        return self._move(ilist, jlist, jstep)
+        return self._moveh(loop_list, jstep)
 
     def move_right(self):#needs to be changed
-        ilist = backwards
-        jlist = backwards
+        loop_list = backwards
         jstep = 1
-        return self._move(ilist, jlist, jstep)
-
+        return self._moveh(loop_list, jstep)
     
-    
-    def _movev(self, ilist, jlist, istep):
+    def _movev(self, loop_list, istep):
         score = 0
         moves = set()
         new_board = self._copy()
-        bmoved = False
-        for j in jlist:
+        for j in loop_list:
             combined = False
-            for i in ilist:
+            for i in loop_list:
                 index = i + istep 
                 real = i
                 zeros = True
@@ -111,25 +104,22 @@ class Board_2048(object):
                         else:
                             zeros = False
                 if moved:
-                    bmoved = True
                     moves.add((real, j, index + change, j))
-        new_board.add_2()
-        if not bmoved:
-            return self, set(), 0
+        if moves == set():
+            return self, set(),0
         else:
+            new_board.add_2()
             return new_board, moves, score
     
     def move_up(self):
-        ilist = range(0,3)
-        jlist = range(0,3)
+        loop_list = range(0,3)
         istep = -1
-        return self._movev(ilist, jlist, istep)
+        return self._movev(loop_list, istep)
         
     def move_down(self):#needs to be changed
-        ilist = backwards
-        jlist = backwards
+        loop_list = backwards
         istep = 1
-        return self._movev(ilist, jlist, istep)
+        return self._movev(loop_list, istep)
         
     def _copy(self):
     	return Board_2048(self.rows)
