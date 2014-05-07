@@ -66,12 +66,18 @@ class Board_2048(object):
         return self._move(ilist, jlist, jstep)
 
     def move_up(self):
+        ilist = range(0,3)
+        jlist = range(0,3)
+        istep = -1
+        return self._movev(ilist, jlist, istep)
+    
+    def _movev(self, ilist, jlist, istep):
         moves = set()
         new_board = self._copy()
         for j in range(0,3):
             combined = False
             for i in range(0,3):
-                index = i - 1
+                index = i + istep 
                 real = i
                 zeros = True
                 moved = False
@@ -82,9 +88,9 @@ class Board_2048(object):
                             if new_board.rows[index][j] == 0:
                                 new_board.rows[index][j] = self.rows[i][j]
                                 new_board.rows[i][j] = 0
-                                index -= 1
-                                i -= 1
-                                change = 1
+                                index += istep
+                                i += istep
+                                change = -istep
                                 moved = True
                             elif new_board.rows[index][j] == self.rows[i][j]:
                                 if not combined:
@@ -106,45 +112,11 @@ class Board_2048(object):
         return new_board, moves
     
     def move_down(self):#needs to be changed
-        moves = set()
-        new_board = self._copy()
-        for j in backwards:
-            combined = False
-            for i in backwards:
-                index = i + 1
-                real = i
-                zeros = True
-                moved = False
-                change = 0
-                if new_board.rows[i][j] != 0:
-                    while zeros:
-                        if index > -1 and index < 3:
-                            if new_board.rows[index][j] == 0:
-                                new_board.rows[index][j] = self.rows[i][j]
-                                new_board.rows[i][j] = 0
-                                index += 1
-                                i += 1
-                                change = -1
-                                moved = True
-                            elif new_board.rows[index][j] == self.rows[i][j]:
-                                if not combined:
-                                    new_board.rows[index][j] = self.rows[index][j]*2
-                                    new_board.rows[i][j] = 0
-                                    zeros = False
-                                    combined = True
-                                    change = 0
-                                    moved = True
-                                else:
-                                    zeros = False
-                            else:
-                                zeros = False
-                        else:
-                            zeros = False
-                if moved:
-                    moves.add((real, j, index + change, j))
-        new_board.add_2()
-        return new_board, moves
-
+        ilist = backwards
+        jlist = backwards
+        istep = 1
+        return self._movev(ilist, jlist, istep)
+        
     def _copy(self):
     	return Board_2048(self.rows)
 
@@ -164,7 +136,7 @@ class Board_2048(object):
         	new_value = 4
         else:
         	new_value = 2
-        #self.rows[i][j] = new_value
+        self.rows[i][j] = new_value
     
     def open_spaces(self):
         open_space = list()
