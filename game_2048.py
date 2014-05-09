@@ -2,6 +2,7 @@
 import pygame, sys
 from pygame import constants as c
 from twenty48 import Board_2048
+import copy
 
 # Shell script for converting images:
 # for filename in *.ico; do name=$(basename $filename .ico);
@@ -41,17 +42,17 @@ class Tile(object):
 
 def main():
     board = Board_2048()
-    print board.rows
     screen = pygame.display.set_mode((320, 320))
     pygame.font.init()
     myfont = pygame.font.SysFont("Comic Sans MS", 30)
     clock = pygame.time.Clock()
     score = -1
     add_score = +1
+    tiles = list()
     tile_images = {}
     tile = None   # todo: change to a list of tiles
     moves = list()
-    for number in ('0', '2', '4', '8', '16', '32', '64', '128', '256'):
+    for number in ('0', '2', '4', '8', '16', '32', '64', '128', '256', '512'):
         filename = 'static/{}.jpg'.format(number)
         image = pygame.image.load(filename)
         image = image.convert_alpha()
@@ -59,8 +60,8 @@ def main():
         tile_images[number] = image
 
     while True:
-        old_board = board
-
+        old_board = copy.deepcopy(board)
+        
         for event in pygame.event.get():
             if event.type == c.KEYDOWN:
                 if event.key == c.K_ESCAPE:
@@ -79,12 +80,13 @@ def main():
                 elif event.key == c.K_DOWN:
                     board, moves, add_score = board.move_down()
                     print moves
-
-        if moves:
+        while moves:    
             i1, j1, i2, j2 = moves.pop()  # todo: make a tile for every item
             number = old_board.rows[i1][j1]
             image = tile_images[str(number)]
-            tile = Tile(image, j1 * 80, i1 * 80, j2 * 80, i2 * 80)
+            tiles.append(Tile(image, j1 * 80, i1 * 80, j2 * 80, i2 * 80))
+                
+        
 
         if add_score:
             score += add_score
@@ -99,6 +101,15 @@ def main():
                 f = 80 * b
                 pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
 
+        
+        
+        for tile in tiles:
+            if tile is not None:
+                tile.blit(screen)
+                tile.move()
+                if tile.done():
+                    tile = None
+                    
         for i in range(0,3):
             j = 0
             for number in board.rows[i]:
@@ -106,20 +117,13 @@ def main():
                 y = 80 * i + 2
                 j += 1
                 number = '%s' % number
-                screen.blit(tile_images[number], (x, y))
-
+                screen.blit(tile_images[number], (x, y))            
+        
         screen.blit(label_1, (2,250))
-
-        if tile is not None:
-            tile.blit(screen)
-            tile.move()
-            if tile.done():
-                tile = None
 
         pygame.display.flip()
         clock.tick(60)
-        moves = set()#to prevent a crazy loop
-
+        moves = set()
 if __name__ == "__main__":
     main()
-
+    

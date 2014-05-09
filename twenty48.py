@@ -1,4 +1,5 @@
 import random
+import copy
 
 class Board_2048(object):
 
@@ -16,7 +17,7 @@ class Board_2048(object):
     def _moveh(self, loop_list, jstep):
         score = 0
         moves = set()
-        new_board = self._copy()
+        new_board = copy.deepcopy(self)
         for i in loop_list:
             combined = False#changed if moved to 4x4
             for j in loop_list:
@@ -70,7 +71,7 @@ class Board_2048(object):
     def _movev(self, loop_list, istep):
         score = 0
         moves = set()
-        new_board = self._copy()
+        new_board = copy.deepcopy(self)
         for j in loop_list:
             combined = False
             for i in loop_list:
@@ -121,9 +122,6 @@ class Board_2048(object):
         istep = 1
         return self._movev(loop_list, istep)
         
-    def _copy(self):
-    	return Board_2048(self.rows)
-
     def print_board(self):
         for i in range(0,3):
             print 'row %s' % i
