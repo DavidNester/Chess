@@ -10,7 +10,7 @@ import copy
 # mv $name-0.png $name.png; rm *-[12345].png; done
 
 class Tile(object):
-    def __init__(self, image, x1, y1, x2, y2, step=4):
+    def __init__(self, image, x1, y1, x2, y2, step=5):
         self.image = image
         # if x1 > x2:
         #     xstep = -1
@@ -61,7 +61,7 @@ def main():
 
     while True:
         old_board = copy.deepcopy(board)
-        
+
         for event in pygame.event.get():
             if event.type == c.KEYDOWN:
                 if event.key == c.K_ESCAPE:
@@ -86,8 +86,6 @@ def main():
             image = tile_images[str(number)]
             tiles.append(Tile(image, j1 * 80, i1 * 80, j2 * 80, i2 * 80))
                 
-        
-
         if add_score:
             score += add_score
             add_score = 0
@@ -100,16 +98,7 @@ def main():
                 e = 80 * a
                 f = 80 * b
                 pygame.draw.rect(screen, (0,0,0), (e,f,80,80), 1)
-
         
-        
-        for tile in tiles:
-            if tile is not None:
-                tile.blit(screen)
-                tile.move()
-                if tile.done():
-                    tile = None
-                    
         for i in range(0,3):
             j = 0
             for number in board.rows[i]:
@@ -118,6 +107,12 @@ def main():
                 j += 1
                 number = '%s' % number
                 screen.blit(tile_images[number], (x, y))            
+        for tile in tiles:
+            if tile is not None:
+                tile.blit(screen)
+                tile.move()
+                if tile.done():
+                    tiles.remove(tile)
         
         screen.blit(label_1, (2,250))
 
